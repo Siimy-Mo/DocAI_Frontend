@@ -120,7 +120,17 @@ export default function SearchRow(props: SearchRowProps) {
                         check(e);
                     }}
                 />
-                <div className="w-3/4 h-60 rounded-md overflow-hidden group-hover:opacity-75">
+                <div className="mt-2 flex justify-center items-center">
+                    <a href={document.storage_url} className="text-center">
+                        <p className="relative text-gray-900 text-center text-sm border-b-2 border-gray-500">
+                            {document.name}
+                        </p>
+                        {/* <p className="relative text-gray-400  text-center text-xs">
+                            {document.created_at.split('T')[0]}
+                        </p> */}
+                    </a>
+                </div>
+                {/* <div className="w-3/4 h-60 rounded-md overflow-hidden group-hover:opacity-75">
                     {document.storage_url.split(/[#?]/)[0].split('.').pop().trim() === 'pdf' ? (
                         <object
                             className="w-full h-full object-center object-contain"
@@ -142,17 +152,8 @@ export default function SearchRow(props: SearchRowProps) {
                             className="w-full h-full object-contain object-center"
                         />
                     )}
-                </div>
-                <div className="mt-2 flex justify-center items-center">
-                    <a href={document.storage_url} className="text-center">
-                        <p className="relative text-gray-900 text-center text-sm">
-                            {document.name}
-                        </p>
-                        {/* <p className="relative text-gray-400  text-center text-xs">
-                            {document.created_at.split('T')[0]}
-                        </p> */}
-                    </a>
-                </div>
+                </div> */}
+                
             </div>)
     }
 
@@ -163,9 +164,13 @@ export default function SearchRow(props: SearchRowProps) {
                 <div
                     className={
                         (deep == 0) ?
-                            "text-black font-bold text-l"
-                            : "text-black"}
+                            "text-black font-bold text-l border-b-2 border-black"
+                            : "text-black border-b-2 border-black"}
                 >
+                    <span
+                    className='font-mono font-bold text-neutral-200 leading-[1.1] text-xl'>
+                        ├─
+                    </span>
                     {document?.subtree_title}
                 </div>
                 <div
@@ -189,7 +194,7 @@ export default function SearchRow(props: SearchRowProps) {
     return (
         <>
             <div>
-            {/* <div className="mt-8 mb-8 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"> */}
+                {/* <div className="mt-8 mb-8 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"> */}
 
                 {tree.map((children: any, index: number) => {
                     // console.log(index + children.subtree_title)
@@ -197,7 +202,7 @@ export default function SearchRow(props: SearchRowProps) {
                     return (
                         <div
                             key={index}
-                            className='bg-gray-100'>
+                            className=''>
                             {ifChildren(children, 0)}
                         </div>)
                 })}
