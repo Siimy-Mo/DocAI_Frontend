@@ -153,7 +153,7 @@ export default function SearchRow(props: SearchRowProps) {
                         />
                     )}
                 </div> */}
-                
+
             </div>)
     }
 
@@ -167,10 +167,6 @@ export default function SearchRow(props: SearchRowProps) {
                             "text-black font-bold text-l border-b-2 border-black"
                             : "text-black border-b-2 border-black"}
                 >
-                    <span
-                    className='font-mono font-bold text-neutral-200 leading-[1.1] text-xl'>
-                        ├─
-                    </span>
                     {document?.subtree_title}
                 </div>
                 <div
@@ -191,21 +187,87 @@ export default function SearchRow(props: SearchRowProps) {
     }
 
 
+
+    const TreeNav = (document: any, deep: number) => {    //判断是否为最后一层
+        console.log(deep, document)
+        if (document.subtree_title) {   // 存在title则还需要遍历child
+            if (deep === 0) {
+                return (
+                    <>
+                        <div
+                            className='py-1 mt-2 font-bold text-neutral-900 leading-[2]'>
+                            {document?.subtree_title}
+                        </div>
+                        {document.children.map((child: any) => TreeNav(child, deep + 1))}
+                    </>
+                )
+            } else {
+                return (
+                    <>
+                        <div className='my-0.5 leading-[1.1]'>
+                            {navBefore(deep)}
+                            {document?.subtree_title}
+                        </div>
+                        {document.children.map((child: any) => TreeNav(child, deep + 1))}
+                    </>
+                )
+            }
+        } else {
+
+            return (
+                <div>
+                    {navBefore(deep)}
+                    {document.name}
+                </div>)
+        }
+    }
+
+    const navBefore = (deep: number) => {
+        if (deep == 1) {
+            return (
+                <span className='font-mono font-bold text-neutral-200 leading-[1.1] text-xl'>└─</span>
+            )
+        } else {    // 大于1的情况
+            return (
+                <>
+                    <span className="font-mono font-bold text-neutral-200 leading-[1.1] text-xl">│&nbsp;</span>
+                    <span className='font-mono font-bold text-neutral-200 leading-[1.1] text-xl'>└─</span>
+                </>
+            )
+        }
+    }
+
     return (
         <>
-            <div>
-                {/* <div className="mt-8 mb-8 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"> */}
+            <div
+                className='flex'>
+                <div
+                    className='text-sm bg-white shadow-md border-[1.5px] border-neutral-300 rounded-[2px] pr-2 py-2 max-w-64 pl-5 pt-2'>
+                    {tree.map((children: any, index: number) => {
+                        // console.log(index + children.subtree_title)
+                        return (
+                            <div
+                                key={index}
+                                className=''>
+                                {TreeNav(children, 0)}
+                            </div>)
+                    })}
 
-                {tree.map((children: any, index: number) => {
-                    // console.log(index + children.subtree_title)
-                    ifChildren(children, 0)
-                    return (
-                        <div
-                            key={index}
-                            className=''>
-                            {ifChildren(children, 0)}
-                        </div>)
-                })}
+                </div>
+
+                <div
+                    className='flex flex-col pl-0.5 sm:ml-5 px-1'>
+
+                    {tree.map((children: any, index: number) => {
+                        // console.log(index + children.subtree_title)
+                        return (
+                            <div
+                                key={index}
+                                className=''>
+                                {ifChildren(children, 0)}
+                            </div>)
+                    })}
+                </div>
             </div>
 
             {/* <div
