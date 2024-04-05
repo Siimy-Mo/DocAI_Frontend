@@ -6,84 +6,87 @@ interface SearchRowProps {
     setChecedkData?: any;
     // checked: boolean;
     setDocument?: any;
+    tree?: any;
 }
 
 
-const tree = [
-    {
-        "children": [
-            {
-                "children": [
-                    {
-                        "id": "e14781a9-a7ad-4145-b692-d171cd4e9646",
-                        "name": "ADM0209_陳兆佳.pdf",
-                        "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/0cdd5076-a2b8-4301-abec-d17502fdf35b_adm0209_陳兆佳.pdf"
-                    },
-                    {
-                        "id": "db1f3c89-a29c-43d1-a949-02cbfe30cc51",
-                        "name": "472.pdf",
-                        "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/7f8629ce-5ddf-48e8-8ac7-8d1d602bc7c8_472.pdf"
-                    }
-                ],
-                "subtree_title": "Customer Service and Relations"
-            },
-            {
-                "children": [
-                    {
-                        "id": "309bfcfc-de2b-45e7-9bd7-187f243b355a",
-                        "name": "39.pdf",
-                        "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/4ce11561-da73-4901-8641-e26bd00b86d3_39.pdf"
-                    },
-                    {
-                        "id": "0b6f82cb-6ae9-4112-800f-69a88f1f7169",
-                        "name": "39.pdf",
-                        "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/271613e7-5a98-4bf1-8b04-becb6f6a662b_39.pdf"
-                    }
-                ],
-                "subtree_title": "Technical and Engineering"
-            }
-        ],
-        "subtree_title": "Professional Experience"
-    },
-    {
-        "children": [
-            {
-                "id": "21f47cae-6c46-4dd2-bddf-a83f11357cd1",
-                "name": "1800.pdf",
-                "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/d52e9ef0-9a68-415c-9184-84789c63b24d_1800.pdf"
-            }
-        ],
-        "subtree_title": "Security and Defense"
-    },
-    {
-        "children": [
-            {
-                "id": "08914651-08b8-42c9-8ebe-56b642190d5d",
-                "name": "CV_20230110.pdf",
-                "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/3acf3fd1-0572-4782-9dd0-272aad30cdf7_2975.pdf"
-            }
-        ],
-        "subtree_title": "IT and Systems Administration"
-    },
-    {
-        "children": [
-            {
-                "id": "9a83467e-63f5-4a89-94ca-962fe298f9e3",
-                "name": "1794.pdf",
-                "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/c2cd9da9-5c03-4092-9d5e-ce436b4d8680_1794.pdf"
-            }
-        ],
-        "subtree_title": "Sales and Marketing"
-    }
-]
+// const tree = [
+//     {
+//         "children": [
+//             {
+//                 "children": [
+//                     {
+//                         "id": "e14781a9-a7ad-4145-b692-d171cd4e9646",
+//                         "name": "ADM0209_陳兆佳.pdf",
+//                         "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/0cdd5076-a2b8-4301-abec-d17502fdf35b_adm0209_陳兆佳.pdf"
+//                     },
+//                     {
+//                         "id": "db1f3c89-a29c-43d1-a949-02cbfe30cc51",
+//                         "name": "472.pdf",
+//                         "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/7f8629ce-5ddf-48e8-8ac7-8d1d602bc7c8_472.pdf"
+//                     }
+//                 ],
+//                 "subtree_title": "Customer Service and Relations"
+//             },
+//             {
+//                 "children": [
+//                     {
+//                         "id": "309bfcfc-de2b-45e7-9bd7-187f243b355a",
+//                         "name": "39.pdf",
+//                         "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/4ce11561-da73-4901-8641-e26bd00b86d3_39.pdf"
+//                     },
+//                     {
+//                         "id": "0b6f82cb-6ae9-4112-800f-69a88f1f7169",
+//                         "name": "39.pdf",
+//                         "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/271613e7-5a98-4bf1-8b04-becb6f6a662b_39.pdf"
+//                     }
+//                 ],
+//                 "subtree_title": "Technical and Engineering"
+//             }
+//         ],
+//         "subtree_title": "Professional Experience"
+//     },
+//     {
+//         "children": [
+//             {
+//                 "id": "21f47cae-6c46-4dd2-bddf-a83f11357cd1",
+//                 "name": "1800.pdf",
+//                 "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/d52e9ef0-9a68-415c-9184-84789c63b24d_1800.pdf"
+//             }
+//         ],
+//         "subtree_title": "Security and Defense"
+//     },
+//     {
+//         "children": [
+//             {
+//                 "id": "08914651-08b8-42c9-8ebe-56b642190d5d",
+//                 "name": "CV_20230110.pdf",
+//                 "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/3acf3fd1-0572-4782-9dd0-272aad30cdf7_2975.pdf"
+//             }
+//         ],
+//         "subtree_title": "IT and Systems Administration"
+//     },
+//     {
+//         "children": [
+//             {
+//                 "id": "9a83467e-63f5-4a89-94ca-962fe298f9e3",
+//                 "name": "1794.pdf",
+//                 "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/c2cd9da9-5c03-4092-9d5e-ce436b4d8680_1794.pdf"
+//             }
+//         ],
+//         "subtree_title": "Sales and Marketing"
+//     }
+// ]
+
+const tree = [{ 'subtree_title': 'DocAI - Roy Ho', 'children': [{ 'id': 'be88691a-aee8-4e88-a114-aadc2785be86', 'storage_url': 'https://m2mda.blob.core.windows.net/chyb-document-storage/d6e77a24-8e78-4cc9-a658-07a56b8ed5a5_docai - roy ho.pdf', 'name': 'DocAI - Roy Ho.pdf' }, { 'id': '1f66ee2f-6435-4ddb-8457-f1c430b361ff', 'storage_url': 'https://m2mda.blob.core.windows.net/chyb-document-storage/068ca2e7-b457-4061-897a-cf14bdcadcb7_docai - roy ho.jpg', 'name': 'DocAI - Roy Ho.jpg' }, { 'id': 'c27b30ed-a690-4c66-8696-de2fb1cb1733', 'storage_url': 'https://m2mda.blob.core.windows.net/chyb-document-storage/04a34a49-9a1f-4397-baf6-378772cecd66_58f9ce92faa44a24f59122cacf3a87f8.jpeg', 'name': '58f9ce92faa44a24f59122cacf3a87f8.jpeg' }, { 'id': 'c55d1af7-46b2-4491-a47a-c2b336bb2db2', 'storage_url': 'https://m2mda.blob.core.windows.net/chyb-document-storage/8b9b5e86-2881-4f9d-b811-b328717bd59a_wechatimg2626.jpeg', 'name': 'WechatIMG2626.jpeg' }, { 'id': 'cdf066cf-8fbf-4b76-ab3a-2402d40e81d0', 'storage_url': 'https://m2mda.blob.core.windows.net/chyb-document-storage/a0680e68-4f11-46a9-bd85-5ebea7f7e37e_docai - roy ho.pdf', 'name': 'DocAI - Roy Ho.pdf' }] }, { 'subtree_title': 'Alice Corporation - Kazuki Yamamoto', 'children': [{ 'id': '015bbb46-0a70-44fb-b5da-fd6249be6f79', 'storage_url': 'https://m2mda.blob.core.windows.net/chyb-document-storage/aa87022e-8038-41e2-9219-cf61e2e29943_kazuki yamamoto.jpg', 'name': 'Kazuki Yamamoto.jpg' }] }, { 'subtree_title': 'MJSSEYA - Bobby Lian', 'children': [{ 'id': '912b9bbe-7f90-4bb4-8cac-9ed04ddd8237', 'storage_url': 'https://m2mda.blob.core.windows.net/chyb-document-storage/006462a6-b714-4147-bce7-7ffd9ca8fec6_image.jpg', 'name': 'image.jpg' }] }]
 
 
 export default function SearchRow(props: SearchRowProps) {
-    const { document, setChecedkData, setDocument } = props;
+    const { document, setChecedkData, setDocument, tree = [] } = props;
 
     const [visable, setVisable] = useState(false);
     const [checked, setCheck] = useState(false);
-    
+
     const [hidden, setHidden] = useState([]);
 
 
