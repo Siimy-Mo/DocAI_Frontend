@@ -2,11 +2,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { StreamingTextResponse } from 'ai';
 
-// This function can run for a maximum of 5 seconds
-export const config = {
-    maxDuration: 300
-};
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
         try {
