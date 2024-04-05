@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import _ from "lodash";
 
 interface SearchRowProps {
@@ -83,6 +83,9 @@ export default function SearchRow(props: SearchRowProps) {
 
     const [visable, setVisable] = useState(false);
     const [checked, setCheck] = useState(false);
+    
+    const [hidden, setHidden] = useState([]);
+
 
     useEffect(() => {
         if (!checked) setVisable(false);
@@ -121,7 +124,7 @@ export default function SearchRow(props: SearchRowProps) {
                         check(e);
                     }}
                 />
-                <div className="mt-2 flex justify-center items-center animate-tree opacity-0">
+                <div className="mt-2 flex justify-center items-center">
                     <a href={document.storage_url} className="text-center">
                         <p className="relative text-gray-900 text-center text-sm border-b-2 border-gray-500">
                             {document.name}
@@ -131,7 +134,7 @@ export default function SearchRow(props: SearchRowProps) {
                         </p> */}
                     </a>
                 </div>
-                <div className="w-3/4 h-40 rounded-md overflow-hidden group-hover:opacity-75 animate-tree opacity-0">
+                <div className="w-3/4 h-40 rounded-md overflow-hidden group-hover:opacity-75">
                     {document.storage_url.split(/[#?]/)[0].split('.').pop().trim() === 'pdf' ? (
                         <object
                             className="w-full h-full object-center object-contain"
@@ -165,8 +168,8 @@ export default function SearchRow(props: SearchRowProps) {
                 <div
                     className={
                         (deep == 0) ?
-                            "text-black font-bold text-l border-b-2 border-black animate-tree opacity-0"
-                            : "text-black border-b-2 border-black animate-tree opacity-0"}
+                            "text-black font-bold text-l border-b-2 border-black"
+                            : "text-black border-b-2 border-black"}
                 >
                     {document?.subtree_title}
                 </div>
@@ -193,7 +196,7 @@ export default function SearchRow(props: SearchRowProps) {
         const paddingLeft = level <= 2 ? 0 : (level - 1) * 0; // 根据层级计算缩进值
         if (item.children) {
             return (
-                <li className={"menuItem mb-2 opacity-0 animate-tree "} style={{ paddingLeft }}>
+                <li className={"menuItem mb-2"} style={{ paddingLeft }}>
                     {
                         !last_last && level >= 3 && _.times(level - 2, function (index) {
                             return <span className="font-mono font-bold text-neutral-200 leading-[1.1] text-xl">|&nbsp;</span>
@@ -209,7 +212,7 @@ export default function SearchRow(props: SearchRowProps) {
                         <span className="font-mono font-bold text-neutral-200 leading-[1.1] text-xl">└─</span>
                     }
                     {item.subtree_title}
-                    <ul className={"submenu"}>
+                    <ul className={"submenu py-1 mt-2 font-bold text-neutral-900 leading-[2]"}>
                         {item.children.map((child: any, index: number) => (
                             <MenuItem key={child.id} item={child} level={level + 1} last={(item.children.length - 1) == index} last_last={last} />
                         ))}
@@ -218,7 +221,7 @@ export default function SearchRow(props: SearchRowProps) {
             );
         }
         return (
-            <li className={"menu"} style={{ paddingLeft }}>
+            <li className={"menu font-normal whitespace-nowrap text-ellipsis overflow-hidden w-32"} style={{ paddingLeft }}>
 
                 {!last_last && last_last != undefined ?
                     <>
@@ -322,8 +325,8 @@ export default function SearchRow(props: SearchRowProps) {
                             </div>)
                     })} */}
 
-                    <ul className={"menu"}>
-                        {document.map((item: any, index: number) => (
+                    <ul className={"menu py-1 mt-2 font-bold text-neutral-900 leading-[2]"}>
+                        {tree.map((item: any, index: number) => (
                             <MenuItem key={item.subtree_title} item={item} level={1} />
                         ))}
                         {/* {tree.map((item: any, index: number) => (
@@ -336,7 +339,7 @@ export default function SearchRow(props: SearchRowProps) {
                 <div
                     className='flex flex-col pl-0.5 sm:ml-5 px-1'>
 
-                    {document.map((children: any, index: number) => {
+                    {tree.map((children: any, index: number) => {
                         // console.log(index + children.subtree_title)
                         return (
                             <div
