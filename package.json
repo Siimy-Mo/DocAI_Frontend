@@ -16,6 +16,7 @@
         "@air/react-drag-to-select": "^5.0.8",
         "@headlessui/react": "^1.5.0",
         "@heroicons/react": "^2.0.15",
+        "@microsoft/fetch-event-source": "^2.0.1",
         "@react-pdf/renderer": "^2.1.1",
         "@rjsf/bootstrap-4": "^4.2.0",
         "@rjsf/core": "^4.2.0",
@@ -25,6 +26,7 @@
         "@types/react-bootstrap": "^0.32.29",
         "@types/react-helmet": "^6.1.6",
         "@typescript-eslint/eslint-plugin": "^5.37.0",
+        "ai": "^3.0.19",
         "airtable": "^0.12.2",
         "animate.css": "^4.1.1",
         "axios": "^0.26.1",
@@ -55,7 +57,8 @@
         "react-spring-bottom-sheet": "^3.4.1",
         "react-to-pdf": "^1.0.1",
         "typescript-coverage-report": "^0.8.0",
-        "yup": "^0.32.11"
+        "yup": "^0.32.11",
+        "zod": "^3.22.4"
     },
     "devDependencies": {
         "@cypress/code-coverage": "^3.11.0",
