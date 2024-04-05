@@ -2,21 +2,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { StreamingTextResponse } from 'ai';
 
+// This function can run for a maximum of 5 seconds
+export const config = {
+    maxDuration: 300
+};
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
         try {
-            // const response: any = await fetch(
-            //     `${process.env.NEXT_PUBLIC_LCEL_FAST_API}/generate/search_documents/tree/stream`,
-            //     {
-            //         method: 'POST',
-            //         headers: {
-            //             accept: 'text/plain',
-            //             'Content-Type': 'application/json'
-            //         },
-            //         body: JSON.stringify(req.body)
-            //     }
-            // );
-
             const Uint8ArrayToString = (fileData: any) => {
                 const utf8 = Array.from(fileData)
                     .map((item: any) => String.fromCharCode(item))
