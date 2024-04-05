@@ -30,6 +30,7 @@ interface SearchViewProps {
     addNewLabelHandler: any;
     schemasStatusReadyData?: any;
     handleDeepUnderstanding?: any;
+    searchTreeData?: any;
 }
 
 export default function SearchView(props: SearchViewProps) {
@@ -50,7 +51,8 @@ export default function SearchView(props: SearchViewProps) {
         setNewLabelName,
         addNewLabelHandler,
         schemasStatusReadyData,
-        handleDeepUnderstanding
+        handleDeepUnderstanding,
+        searchTreeData = []
     } = props;
     const router = useRouter();
     const [document, setDocument] = useState<any>();
@@ -153,7 +155,7 @@ export default function SearchView(props: SearchViewProps) {
                 }}
             />
 
-            <div className="px-16 py-2 flex flex-col h-full">
+            <div className="py-2 flex flex-col h-full">
                 <div>
                     <p className=" text-black text-xl font-bold">
                         與 "
@@ -168,6 +170,7 @@ export default function SearchView(props: SearchViewProps) {
                         setChecedkData={setChecedkData}
                         // checked={_.includes(documents_items, document?.id)}
                         setDocument={setDocument}
+                        tree={searchTreeData}
                     />
 
                     {/* <div className="mt-8 mb-8  grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">

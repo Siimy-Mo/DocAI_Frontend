@@ -18,6 +18,7 @@ function SearchContainer() {
     const [documents_items, setDocumentsItems] = useState<any>([]);
     const [updateTag, setUpdateTag] = useState(false);
     const [newLabelName, setNewLabelName] = useState('');
+    const [searchTreeData, setSearchTreeData] = useState<any>([]);
     const [label, setLabel] = useState<any>();
     const [
         {
@@ -104,9 +105,18 @@ function SearchContainer() {
                         try {
                             while (true) {
                                 const { done, value } = await reader.read();
-                                console.log(value);
                                 if (done) break;
-                                console.log(decoder.decode(value));
+                                const rawData = decoder.decode(value);
+                                const data = rawData.replace(/^data: ?/, '');
+                                let jsonData: any = {};
+                                try {
+                                    jsonData = JSON.parse(data);
+                                } catch (error) {
+                                    continue;
+                                }
+                                if (jsonData && jsonData.tree) {
+                                    setSearchTreeData(jsonData.tree);
+                                }
                             }
                         } catch (error) {
                             console.error('Stream reading failed:', error);
@@ -258,7 +268,8 @@ function SearchContainer() {
                     confirmDocumentFormik,
                     getAllLabelsData,
                     schemasStatusReadyData,
-                    handleDeepUnderstanding
+                    handleDeepUnderstanding,
+                    searchTreeData
                 }}
             />
         </>

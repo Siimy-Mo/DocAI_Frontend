@@ -195,7 +195,7 @@ export default function SearchRow(props: SearchRowProps) {
                     </a>
                 </div>
                 <div className="w-3/4 h-40 rounded-md overflow-hidden group-hover:opacity-75">
-                    {document.storage_url.split(/[#?]/)[0].split('.').pop().trim() === 'pdf' ? (
+                    {document.storage_url?.split(/[#?]/)[0].split('.').pop().trim() === 'pdf' ? (
                         <object
                             className="w-full h-full object-center object-contain"
                             type="application/pdf"
@@ -221,11 +221,42 @@ export default function SearchRow(props: SearchRowProps) {
         );
     };
 
+    // const ifChildren = (document: any, deep: number) => {
+    //     //判断是否为最后一层
+    //     if (document?.subtree_title) {
+    //         // 存在title则还需要遍历child
+    //         // console.log(deep, node?.subtree_title)
+    //         return (
+    //             <>
+    //                 <div
+    //                     className={
+    //                         deep == 0
+    //                             ? 'text-black font-bold text-l border-b-2 border-black'
+    //                             : 'text-black border-b-2 border-black'
+    //                     }
+    //                 >
+    //                     {document?.subtree_title}
+    //                 </div>
+    //                 <div
+    //                     className={
+    //                         document?.children[0]?.subtree_title ? 'flex flex-col' : 'flex flex-row'
+    //                     }
+    //                 >
+    //                     {document?.children?.map((child: any) => ifChildren(child, deep + 1))}
+    //                 </div>
+    //             </>
+    //         );
+    //     } else {
+    //         // console.log(deep, document.name)  //没有title，最后一层输出name
+    //         return ChildrenRow(document);
+    //     }
+    // };
+
     const ifChildren = (document: any, deep: number) => {
-        //判断是否为最后一层
-        if (document.subtree_title) {
+        // 判断是否为最后一层
+        if (document?.subtree_title) {
             // 存在title则还需要遍历child
-            // console.log(deep, node?.subtree_title)
+            // console.log(deep, document?.subtree_title)
             return (
                 <>
                     <div
@@ -239,15 +270,19 @@ export default function SearchRow(props: SearchRowProps) {
                     </div>
                     <div
                         className={
-                            document.children[0].subtree_title ? 'flex flex-col' : 'flex flex-row'
+                            document?.children &&
+                            document.children.length > 0 &&
+                            document.children[0]?.subtree_title
+                                ? 'flex flex-col'
+                                : 'flex flex-row'
                         }
                     >
-                        {document.children.map((child: any) => ifChildren(child, deep + 1))}
+                        {document?.children?.map((child: any) => ifChildren(child, deep + 1))}
                     </div>
                 </>
             );
         } else {
-            // console.log(deep, document.name)  //没有title，最后一层输出name
+            // 没有title，最后一层输出name
             return ChildrenRow(document);
         }
     };
@@ -403,22 +438,10 @@ export default function SearchRow(props: SearchRowProps) {
         <>
             <div className="flex">
                 <div className="text-sm bg-white shadow-md border-[1.5px] border-neutral-300 rounded-[2px] pr-2 py-2 max-w-64 pl-5 pt-2">
-                    {/* {document.map((children: any, index: number) => {
-                        return (
-                            <div
-                                key={index}
-                                className=''>
-                                {TreeNav(children, 0)}
-                            </div>)
-                    })} */}
-
                     <ul className={'menu py-1 mt-2 font-bold text-neutral-900 leading-[2]'}>
                         {tree.map((item: any, index: number) => (
-                            <MenuItem key={item.subtree_title} item={item} level={1} />
+                            <MenuItem key={index} item={item} level={1} />
                         ))}
-                        {/* {tree.map((item: any, index: number) => (
-                            <MenuItem key={item.subtree_title} item={item} level={1} />
-                        ))} */}
                     </ul>
                 </div>
 

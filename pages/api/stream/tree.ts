@@ -60,47 +60,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         'Content-Type': 'application/json'
                     },
                     onmessage: (response: any) => {
-                        console.log(response);
-                        // return new StreamingTextResponse(res)
                         res.write(response);
                     }
                 }
             );
-
-            // res.setHeader('Content-Type', 'text/event-stream');
-            // const reader = response.body.getReader();
-
-            // const stream = new ReadableStream({
-            //     async start(controller) {
-            //         while (true) {
-            //             const { done, value } = await reader.read();
-            //             if (done) {
-            //                 break;
-            //             }
-            //             const chunk = new TextDecoder().decode(value);
-            //             controller.enqueue(chunk);
-            //         }
-            //         controller.close();
-            //         reader.releaseLock();
-            //     }
-            // });
-
-            // if (res.socket?.writable) {
-            //     stream.pipeTo(
-            //         new WritableStream({
-            //             write(chunk) {
-            //                 res.write(chunk);
-            //             },
-            //             close() {
-            //                 res.end();
-            //             }
-            //         })
-            //     );
-            // } else {
-            //     res.status(503).end();
-            // }
-
-            console.log('Stream: ', stream);
 
             return new StreamingTextResponse(stream);
         } catch (error) {
