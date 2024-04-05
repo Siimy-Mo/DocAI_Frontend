@@ -138,7 +138,7 @@ export default function SearchView(props: SearchViewProps) {
                 // count={documents_items?.length}
                 count={0}
             />
-            {/* <SingleActionModel
+            <SingleActionModel
                 {...{
                     open,
                     setOpen,
@@ -151,7 +151,7 @@ export default function SearchView(props: SearchViewProps) {
                         />
                     )
                 }}
-            /> */}
+            />
 
             <div className="px-16 py-2 flex flex-col h-full">
                 <div>

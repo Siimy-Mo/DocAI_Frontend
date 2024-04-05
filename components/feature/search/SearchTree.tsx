@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import _ from "lodash";
 
 interface SearchRowProps {
     document?: any;
@@ -81,7 +82,7 @@ export default function SearchRow(props: SearchRowProps) {
     const { document, setChecedkData, setDocument } = props;
 
     const [visable, setVisable] = useState(false);
-    const [checked, setCheck] = useState(true);
+    const [checked, setCheck] = useState(false);
 
     useEffect(() => {
         if (!checked) setVisable(false);
@@ -120,7 +121,7 @@ export default function SearchRow(props: SearchRowProps) {
                         check(e);
                     }}
                 />
-                <div className="mt-2 flex justify-center items-center">
+                <div className="mt-2 flex justify-center items-center animate-tree opacity-0">
                     <a href={document.storage_url} className="text-center">
                         <p className="relative text-gray-900 text-center text-sm border-b-2 border-gray-500">
                             {document.name}
@@ -130,7 +131,7 @@ export default function SearchRow(props: SearchRowProps) {
                         </p> */}
                     </a>
                 </div>
-                {/* <div className="w-3/4 h-60 rounded-md overflow-hidden group-hover:opacity-75">
+                <div className="w-3/4 h-40 rounded-md overflow-hidden group-hover:opacity-75 animate-tree opacity-0">
                     {document.storage_url.split(/[#?]/)[0].split('.').pop().trim() === 'pdf' ? (
                         <object
                             className="w-full h-full object-center object-contain"
@@ -152,7 +153,7 @@ export default function SearchRow(props: SearchRowProps) {
                             className="w-full h-full object-contain object-center"
                         />
                     )}
-                </div> */}
+                </div>
 
             </div>)
     }
@@ -164,8 +165,8 @@ export default function SearchRow(props: SearchRowProps) {
                 <div
                     className={
                         (deep == 0) ?
-                            "text-black font-bold text-l border-b-2 border-black"
-                            : "text-black border-b-2 border-black"}
+                            "text-black font-bold text-l border-b-2 border-black animate-tree opacity-0"
+                            : "text-black border-b-2 border-black animate-tree opacity-0"}
                 >
                     {document?.subtree_title}
                 </div>
@@ -186,6 +187,74 @@ export default function SearchRow(props: SearchRowProps) {
         }
     }
 
+
+    const MenuItem = ({ item, level, last, last_last }: any) => {
+
+        const paddingLeft = level <= 2 ? 0 : (level - 1) * 0; // 根据层级计算缩进值
+        if (item.children) {
+            return (
+                <li className={"menuItem mb-2 opacity-0 animate-tree "} style={{ paddingLeft }}>
+                    {
+                        !last_last && level >= 3 && _.times(level - 2, function (index) {
+                            return <span className="font-mono font-bold text-neutral-200 leading-[1.1] text-xl">|&nbsp;</span>
+                        })
+                    }
+                    {!last && level !== 1 &&
+                        <>
+
+                            <span className="font-mono font-bold text-neutral-200 leading-[1.1] text-xl">├─</span>
+                        </>
+                    }
+                    {last &&
+                        <span className="font-mono font-bold text-neutral-200 leading-[1.1] text-xl">└─</span>
+                    }
+                    {item.subtree_title}
+                    <ul className={"submenu"}>
+                        {item.children.map((child: any, index: number) => (
+                            <MenuItem key={child.id} item={child} level={level + 1} last={(item.children.length - 1) == index} last_last={last} />
+                        ))}
+                    </ul>
+                </li >
+            );
+        }
+        return (
+            <li className={"menu"} style={{ paddingLeft }}>
+
+                {!last_last && last_last != undefined ?
+                    <>
+                        {
+                            level >= 3 && _.times(level - 2, function (index) {
+                                return <span className="font-mono font-bold text-neutral-200 leading-[1.1] text-xl">|&nbsp;</span>
+                            })
+                        }
+                    </>
+                    :
+                    last_last != undefined ?
+                        <>
+                            {
+                                level >= 3 && _.times(level - 2, function (index) {
+                                    return <span className="font-mono font-bold text-neutral-200 leading-[1.1] text-xl">&nbsp;&nbsp;</span>
+                                })
+                            }
+
+                        </>
+                        : <span className="font-mono font-bold text-neutral-200 leading-[1.1] text-xl"></span>
+                }
+
+                {last ?
+                    <>
+                        <span className="font-mono font-bold text-neutral-200 leading-[1.1] text-xl">└─</span>
+                    </>
+                    :
+                    <>
+
+                        <span className="font-mono font-bold text-neutral-200 leading-[1.1] text-xl">├─</span>
+                    </>
+                }
+                {item.name}
+            </li>
+        );
+    };
 
 
     const TreeNav = (document: any, deep: number) => {    //判断是否为最后一层
@@ -213,7 +282,6 @@ export default function SearchRow(props: SearchRowProps) {
                 )
             }
         } else {
-
             return (
                 <div>
                     {navBefore(deep)}
@@ -237,28 +305,38 @@ export default function SearchRow(props: SearchRowProps) {
         }
     }
 
+
+
     return (
         <>
             <div
                 className='flex'>
                 <div
                     className='text-sm bg-white shadow-md border-[1.5px] border-neutral-300 rounded-[2px] pr-2 py-2 max-w-64 pl-5 pt-2'>
-                    {tree.map((children: any, index: number) => {
-                        // console.log(index + children.subtree_title)
+                    {/* {document.map((children: any, index: number) => {
                         return (
                             <div
                                 key={index}
                                 className=''>
                                 {TreeNav(children, 0)}
                             </div>)
-                    })}
+                    })} */}
+
+                    <ul className={"menu"}>
+                        {document.map((item: any, index: number) => (
+                            <MenuItem key={item.subtree_title} item={item} level={1} />
+                        ))}
+                        {/* {tree.map((item: any, index: number) => (
+                            <MenuItem key={item.subtree_title} item={item} level={1} />
+                        ))} */}
+                    </ul>
 
                 </div>
 
                 <div
                     className='flex flex-col pl-0.5 sm:ml-5 px-1'>
 
-                    {tree.map((children: any, index: number) => {
+                    {document.map((children: any, index: number) => {
                         // console.log(index + children.subtree_title)
                         return (
                             <div
@@ -269,63 +347,6 @@ export default function SearchRow(props: SearchRowProps) {
                     })}
                 </div>
             </div>
-
-            {/* <div
-                key={document.id}
-                className={`group relative flex flex-col justify-start items-center p-4 rounded-md hover:bg-gray-100 ${checked && 'bg-gray-100'
-                    }`}
-                onMouseEnter={() => {
-                    onMouseEnter();
-                }}
-                onMouseLeave={() => {
-                    onMouseLeave();
-                }}
-            >
-                {(visable || checked) && (
-                    <input
-                        type={'radio'}
-                        value={document.id}
-                        name="document"
-                        className=" absolute top-2 right-2"
-                        onChange={(e) => {
-                            check(e);
-                        }}
-                    />
-                )}
-                <div className="w-3/4 h-60 rounded-md overflow-hidden group-hover:opacity-75">
-                    {document.storage_url.split(/[#?]/)[0].split('.').pop().trim() === 'pdf' ? (
-                        <object
-                            className="w-full h-full object-center object-contain"
-                            type="application/pdf"
-                            data={document.storage_url + '#toolbar=0'}
-                        >
-                            <img
-                                src={
-                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/833px-PDF_file_icon.svg.png'
-                                }
-                                alt="PDF file icon"
-                                className="w-full h-full object-contain object-center"
-                            />
-                        </object>
-                    ) : (
-                        <img
-                            src={document.storage_url}
-                            alt={document.name}
-                            className="w-full h-full object-contain object-center"
-                        />
-                    )}
-                </div>
-                <div className="mt-2 flex justify-center items-center">
-                    <a href={document.storage_url} className="text-center">
-                        <p className="relative text-gray-900 text-center text-sm">
-                            {document.name}
-                        </p>
-                        <p className="relative text-gray-400  text-center text-xs">
-                            {document.created_at.split('T')[0]} 
-                        </p>
-                    </a>
-                </div>
-            </div> */}
         </>
     );
 }
