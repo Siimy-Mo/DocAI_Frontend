@@ -586,7 +586,7 @@ module.exports = {
             fadeIn: {
                 '100%': {
                     opacity: '1'
-                },
+                }
             }
         },
         letterSpacing: {
