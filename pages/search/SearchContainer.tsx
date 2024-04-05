@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Api from '../../apis/index';
 import useAlert from '../../hooks/useAlert';
 import SearchView from './SearchView';
+import { fetchEventSource } from '@microsoft/fetch-event-source';
 
 const apiSetting = new Api();
 
@@ -86,6 +87,34 @@ function SearchContainer() {
             });
             if (res.data) {
                 setOpen(false);
+                const fetchData = async () => {
+                    const response = await fetch('/api/stream/tree', {
+                        method: 'POST',
+                        headers: {
+                            accept: 'text/event-stream',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ documents: res.data.documents })
+                    });
+
+                    if (response.body) {
+                        const reader = response.body.getReader();
+                        const decoder = new TextDecoder();
+
+                        try {
+                            while (true) {
+                                const { done, value } = await reader.read();
+                                console.log(value);
+                                if (done) break;
+                                console.log(decoder.decode(value));
+                            }
+                        } catch (error) {
+                            console.error('Stream reading failed:', error);
+                        }
+                    }
+                };
+
+                fetchData();
             }
         }
     });
