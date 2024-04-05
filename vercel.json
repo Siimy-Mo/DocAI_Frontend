@@ -1,0 +1,16 @@
+{
+    "functions": {
+        "api/stream/tree.ts": {
+            "maxDuration": 300
+        },
+        "api/*.ts": {
+            "maxDuration": 300
+        },
+        "app/api/**/*": {
+            "maxDuration": 300
+        },
+        "pages/api/**/*": {
+            "maxDuration": 300
+        }
+    }
+}
