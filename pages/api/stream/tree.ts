@@ -2,6 +2,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { StreamingTextResponse } from 'ai';
 
+export const config = {
+    supportsResponseStreaming: true
+};
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
         try {
