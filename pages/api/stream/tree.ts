@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { StreamingTextResponse } from 'ai';
 
-export const runtime = 'nodejs'; // or 'nodejs' which uses Serverless Functions
+// export const runtime = 'nodejs'; // or 'nodejs' which uses Serverless Functions
 export const dynamic = 'force-dynamic'; // always run dynamically
 
 export const config = {
