@@ -12,12 +12,6 @@ export const config = {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
         try {
-            res.writeHead(200, {
-                Connection: 'keep-alive',
-                'Cache-Control': 'no-cache',
-                'Content-Type': 'text/event-stream'
-            });
-
             const Uint8ArrayToString = (fileData: any) => {
                 const utf8 = Array.from(fileData)
                     .map((item: any) => String.fromCharCode(item))
@@ -57,6 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     method: 'POST',
                     body: JSON.stringify(req.body),
                     headers: {
+                        Connection: 'keep-alive',
                         accept: 'text/event-stream',
                         'Content-Type': 'application/json'
                     },
