@@ -1,15 +1,12 @@
 {
     "functions": {
         "pages/api/stream/tree.ts": {
-            "memory": 1024,
             "maxDuration": 900
         },
         "pages/api/**/*.ts": {
-            "memory": 1024,
             "maxDuration": 900
         },
         "pages/api/**/*": {
-            "memory": 1024,
             "maxDuration": 900
         }
     }
