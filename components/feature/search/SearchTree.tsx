@@ -175,7 +175,7 @@ export default function SearchRow(props: SearchRowProps) {
                             document.children.length > 0 &&
                             document.children[0]?.subtree_title
                                 ? 'flex flex-col'
-                                : 'flex flex-row'
+                                : 'flex flex-row flex-wrap'
                         }
                     >
                         {document?.children?.map((child: any) => ifChildren(child, deep + 1))}
@@ -280,76 +280,20 @@ export default function SearchRow(props: SearchRowProps) {
         );
     };
 
-    const TreeNav = (document: any, deep: number) => {
-        //判断是否为最后一层
-        console.log(deep, document);
-        if (document.subtree_title) {
-            // 存在title则还需要遍历child
-            if (deep === 0) {
-                return (
-                    <>
-                        <div className="py-1 mt-2 font-bold text-neutral-900 leading-[2]">
-                            {document?.subtree_title}
-                        </div>
-                        {document.children.map((child: any) => TreeNav(child, deep + 1))}
-                    </>
-                );
-            } else {
-                return (
-                    <>
-                        <div className="my-0.5 leading-[1.1]">
-                            {navBefore(deep)}
-                            {document?.subtree_title}
-                        </div>
-                        {document.children.map((child: any) => TreeNav(child, deep + 1))}
-                    </>
-                );
-            }
-        } else {
-            return (
-                <div>
-                    {navBefore(deep)}
-                    {document.name}
-                </div>
-            );
-        }
-    };
-
-    const navBefore = (deep: number) => {
-        if (deep == 1) {
-            return (
-                <span className="font-mono font-bold text-neutral-200 leading-[1.1] text-xl">
-                    └─
-                </span>
-            );
-        } else {
-            // 大于1的情况
-            return (
-                <>
-                    <span className="font-mono font-bold text-neutral-200 leading-[1.1] text-xl">
-                        │&nbsp;
-                    </span>
-                    <span className="font-mono font-bold text-neutral-200 leading-[1.1] text-xl">
-                        └─
-                    </span>
-                </>
-            );
-        }
-    };
 
     return (
         <>
             <div className="flex scroll-smooth">
                 <div className="text-sm bg-white shadow-md border-[1.5px] border-neutral-300 rounded-[2px] pr-2 py-2 max-w-64 pl-5 pt-2">
                     <ul className={'menu py-1 mt-2 font-bold text-neutral-900 leading-[2]'}>
-                        {tree.map((item: any, index: number) => (
+                        {trees.map((item: any, index: number) => (
                             <MenuItem key={index} item={item} level={1} />
                         ))}
                     </ul>
                 </div>
 
                 <div className="flex flex-col pl-0.5 sm:ml-5 px-1">
-                    {tree.map((children: any, index: number) => {
+                    {trees.map((children: any, index: number) => {
                         // console.log(index + children.subtree_title)
                         return (
                             <div key={index} className="">
