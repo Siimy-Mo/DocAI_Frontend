@@ -2,6 +2,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { StreamingTextResponse } from 'ai';
 
+export const runtime = 'edge'; // or 'nodejs' which uses Serverless Functions
+export const dynamic = 'force-dynamic'; // always run dynamically
+
 export const config = {
     supportsResponseStreaming: true
 };
@@ -57,7 +60,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 }
             );
 
-            return new StreamingTextResponse(stream);
+            // return new StreamingTextResponse(stream);
+            return res.send(stream);
         } catch (error) {
             console.error('Error:', error);
             res.status(500).json({ message: 'Internal Server Error' });
