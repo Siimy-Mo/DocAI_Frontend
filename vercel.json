@@ -1,13 +1,13 @@
 {
     "functions": {
         "pages/api/stream/tree.ts": {
-            "maxDuration": 900
+            "maxDuration": 300
         },
         "pages/api/**/*.ts": {
-            "maxDuration": 900
+            "maxDuration": 300
         },
         "pages/api/**/*": {
-            "maxDuration": 900
+            "maxDuration": 300
         }
     }
 }
