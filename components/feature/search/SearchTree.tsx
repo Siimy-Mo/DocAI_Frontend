@@ -9,75 +9,7 @@ interface SearchRowProps {
     tree?: any;
 }
 
-// const tree = [
-//     {
-//         "children": [
-//             {
-//                 "children": [
-//                     {
-//                         "id": "e14781a9-a7ad-4145-b692-d171cd4e9646",
-//                         "name": "ADM0209_陳兆佳.pdf",
-//                         "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/0cdd5076-a2b8-4301-abec-d17502fdf35b_adm0209_陳兆佳.pdf"
-//                     },
-//                     {
-//                         "id": "db1f3c89-a29c-43d1-a949-02cbfe30cc51",
-//                         "name": "472.pdf",
-//                         "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/7f8629ce-5ddf-48e8-8ac7-8d1d602bc7c8_472.pdf"
-//                     }
-//                 ],
-//                 "subtree_title": "Customer Service and Relations"
-//             },
-//             {
-//                 "children": [
-//                     {
-//                         "id": "309bfcfc-de2b-45e7-9bd7-187f243b355a",
-//                         "name": "39.pdf",
-//                         "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/4ce11561-da73-4901-8641-e26bd00b86d3_39.pdf"
-//                     },
-//                     {
-//                         "id": "0b6f82cb-6ae9-4112-800f-69a88f1f7169",
-//                         "name": "39.pdf",
-//                         "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/271613e7-5a98-4bf1-8b04-becb6f6a662b_39.pdf"
-//                     }
-//                 ],
-//                 "subtree_title": "Technical and Engineering"
-//             }
-//         ],
-//         "subtree_title": "Professional Experience"
-//     },
-//     {
-//         "children": [
-//             {
-//                 "id": "21f47cae-6c46-4dd2-bddf-a83f11357cd1",
-//                 "name": "1800.pdf",
-//                 "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/d52e9ef0-9a68-415c-9184-84789c63b24d_1800.pdf"
-//             }
-//         ],
-//         "subtree_title": "Security and Defense"
-//     },
-//     {
-//         "children": [
-//             {
-//                 "id": "08914651-08b8-42c9-8ebe-56b642190d5d",
-//                 "name": "CV_20230110.pdf",
-//                 "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/3acf3fd1-0572-4782-9dd0-272aad30cdf7_2975.pdf"
-//             }
-//         ],
-//         "subtree_title": "IT and Systems Administration"
-//     },
-//     {
-//         "children": [
-//             {
-//                 "id": "9a83467e-63f5-4a89-94ca-962fe298f9e3",
-//                 "name": "1794.pdf",
-//                 "storage_url": "https://m2mda.blob.core.windows.net/chyb-document-storage/c2cd9da9-5c03-4092-9d5e-ce436b4d8680_1794.pdf"
-//             }
-//         ],
-//         "subtree_title": "Sales and Marketing"
-//     }
-// ]
-
-const tree = [
+const trees = [
     {
         subtree_title: 'DocAI - Roy Ho',
         children: [
@@ -184,7 +116,7 @@ export default function SearchRow(props: SearchRowProps) {
                         check(e);
                     }}
                 />
-                <div className="mt-2 flex justify-center items-center">
+                <div className="mt-2 flex justify-center items-center" id={document.id}>
                     <a href={document.storage_url} className="text-center">
                         <p className="relative text-gray-900 text-center text-sm border-b-2 border-gray-500">
                             {document.name}
@@ -220,37 +152,6 @@ export default function SearchRow(props: SearchRowProps) {
             </div>
         );
     };
-
-    // const ifChildren = (document: any, deep: number) => {
-    //     //判断是否为最后一层
-    //     if (document?.subtree_title) {
-    //         // 存在title则还需要遍历child
-    //         // console.log(deep, node?.subtree_title)
-    //         return (
-    //             <>
-    //                 <div
-    //                     className={
-    //                         deep == 0
-    //                             ? 'text-black font-bold text-l border-b-2 border-black'
-    //                             : 'text-black border-b-2 border-black'
-    //                     }
-    //                 >
-    //                     {document?.subtree_title}
-    //                 </div>
-    //                 <div
-    //                     className={
-    //                         document?.children[0]?.subtree_title ? 'flex flex-col' : 'flex flex-row'
-    //                     }
-    //                 >
-    //                     {document?.children?.map((child: any) => ifChildren(child, deep + 1))}
-    //                 </div>
-    //             </>
-    //         );
-    //     } else {
-    //         // console.log(deep, document.name)  //没有title，最后一层输出name
-    //         return ChildrenRow(document);
-    //     }
-    // };
 
     const ifChildren = (document: any, deep: number) => {
         // 判断是否为最后一层
@@ -372,7 +273,9 @@ export default function SearchRow(props: SearchRowProps) {
                         </span>
                     </>
                 )}
+                <a href={'#'+item.id}>
                 {item.name}
+                </a>
             </li>
         );
     };
@@ -436,7 +339,7 @@ export default function SearchRow(props: SearchRowProps) {
 
     return (
         <>
-            <div className="flex">
+            <div className="flex scroll-smooth">
                 <div className="text-sm bg-white shadow-md border-[1.5px] border-neutral-300 rounded-[2px] pr-2 py-2 max-w-64 pl-5 pt-2">
                     <ul className={'menu py-1 mt-2 font-bold text-neutral-900 leading-[2]'}>
                         {tree.map((item: any, index: number) => (
