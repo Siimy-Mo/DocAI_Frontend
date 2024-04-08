@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Api from '../../apis/index';
 import useAlert from '../../hooks/useAlert';
 import SearchView from './SearchView';
+import { useCompletion } from 'ai/react';
 
 const apiSetting = new Api();
 
@@ -91,14 +92,15 @@ function SearchContainer() {
                     const response = await fetch('/api/stream/tree', {
                         method: 'POST',
                         headers: {
-                            accept: 'text/event-stream',
-                            'Content-Type': 'application/json',
-                            Connection: 'keep-alive'
+                            // accept: 'text/event-stream',
+                            'Content-Type': 'application/json'
+                            // Connection: 'keep-alive'
                         },
                         body: JSON.stringify({ documents: res.data.documents })
                     });
 
                     if (response.body) {
+                        console.log('Response body:', response.body);
                         const reader = response.body.getReader();
                         const decoder = new TextDecoder();
 
@@ -122,6 +124,10 @@ function SearchContainer() {
                             console.error('Stream reading failed:', error);
                         }
                     }
+
+                    // const { complete } = useCompletion({
+                    //     api: '/api/completion',
+                    //   });
                 };
 
                 fetchData();
