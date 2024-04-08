@@ -6,7 +6,7 @@ import { StreamingTextResponse } from 'ai';
 // export const dynamic = 'force-dynamic'; // always run dynamically
 
 export const config = {
-    supportsResponseStreaming: true,
+    supportsResponseStreaming: true
     // runtime: 'edge',
     // dynamic: 'force-dynamic'
 };
