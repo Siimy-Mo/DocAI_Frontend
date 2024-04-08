@@ -8,7 +8,7 @@ import { StreamingTextResponse } from 'ai';
 export const config = {
     supportsResponseStreaming: true,
     // runtime: 'edge',
-    dynamic: 'force-dynamic'
+    // dynamic: 'force-dynamic'
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
