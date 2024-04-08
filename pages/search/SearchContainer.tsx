@@ -93,7 +93,7 @@ function SearchContainer() {
                         headers: {
                             accept: 'text/event-stream',
                             'Content-Type': 'application/json',
-                            Connection: 'keep-alive',
+                            Connection: 'keep-alive'
                         },
                         body: JSON.stringify({ documents: res.data.documents })
                     });
