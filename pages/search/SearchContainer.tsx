@@ -92,7 +92,8 @@ function SearchContainer() {
                         method: 'POST',
                         headers: {
                             accept: 'text/event-stream',
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            Connection: 'keep-alive',
                         },
                         body: JSON.stringify({ documents: res.data.documents })
                     });
