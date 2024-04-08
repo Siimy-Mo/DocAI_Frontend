@@ -286,14 +286,14 @@ export default function SearchRow(props: SearchRowProps) {
             <div className="flex scroll-smooth">
                 <div className="text-sm bg-white shadow-md border-[1.5px] border-neutral-300 rounded-[2px] pr-2 py-2 max-w-64 pl-5 pt-2">
                     <ul className={'menu py-1 mt-2 font-bold text-neutral-900 leading-[2]'}>
-                        {trees.map((item: any, index: number) => (
+                        {tree.map((item: any, index: number) => (
                             <MenuItem key={index} item={item} level={1} />
                         ))}
                     </ul>
                 </div>
 
                 <div className="flex flex-col pl-0.5 sm:ml-5 px-1">
-                    {trees.map((children: any, index: number) => {
+                    {tree.map((children: any, index: number) => {
                         // console.log(index + children.subtree_title)
                         return (
                             <div key={index} className="">
