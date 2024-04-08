@@ -1,5 +1,6 @@
 // pages/api/tree.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { StreamingTextResponse } from 'ai';
 
 export const runtime = 'nodejs'; // or 'nodejs' which uses Serverless Functions
 export const dynamic = 'force-dynamic'; // always run dynamically
@@ -11,9 +12,10 @@ export const config = {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
         try {
-            res.setHeader('Content-Type', 'text/event-stream');
+            res.setHeader('Content-Type', 'application/json');
             res.setHeader('Cache-Control', 'no-cache, no-transform');
             res.setHeader('Connection', 'keep-alive');
+            res.setHeader('accept', 'text/event-stream');
             const Uint8ArrayToString = (fileData: any) => {
                 const utf8 = Array.from(fileData)
                     .map((item: any) => String.fromCharCode(item))
@@ -55,16 +57,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     headers: {
                         Connection: 'keep-alive',
                         accept: 'text/event-stream',
-                        'Content-Type': 'text/event-stream'
+                        'Content-Type': 'application/json'
                     },
                     onmessage: (response: any) => {
+                        console.log(response);
                         res.write(response);
                     }
                 }
             );
 
             // return new StreamingTextResponse(stream);
-            return res.send(stream);
+            // return res.send(stream);
         } catch (error) {
             console.error('Error:', error);
             res.status(500).json({ message: 'Internal Server Error' });
