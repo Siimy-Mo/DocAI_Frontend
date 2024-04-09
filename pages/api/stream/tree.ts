@@ -5,121 +5,122 @@ import { StreamingTextResponse } from 'ai';
 
 export const config = {
     supportsResponseStreaming: true,
-    runtime: 'edge'
+    runtime: 'edge',
+    dynamic: 'force-dynamic'
 };
 
 export default async function handler(req: NextApiRequest) {
-    const Uint8ArrayToString = (fileData: any) => {
-        const utf8 = Array.from(fileData)
-            .map((item: any) => String.fromCharCode(item))
-            .join('');
+    // const Uint8ArrayToString = (fileData: any) => {
+    //     const utf8 = Array.from(fileData)
+    //         .map((item: any) => String.fromCharCode(item))
+    //         .join('');
 
-        return decodeURIComponent(escape(utf8));
-    };
+    //     return decodeURIComponent(escape(utf8));
+    // };
 
-    const fetchStream = (url: any, params: any) => {
-        console.log(req.body);
-        const { onmessage, onclose, ...otherParams } = params;
+    // const fetchStream = (url: any, params: any) => {
+    //     console.log(req.body);
+    //     const { onmessage, onclose, ...otherParams } = params;
 
-        const push = async (controller: any, reader: any) => {
-            const { value, done } = await reader.read();
-            if (done) {
-                controller.close();
-                onclose?.();
-            } else {
-                onmessage?.(Uint8ArrayToString(value));
-                controller.enqueue(value);
-                push(controller, reader);
-            }
-        };
+    //     const push = async (controller: any, reader: any) => {
+    //         const { value, done } = await reader.read();
+    //         if (done) {
+    //             controller.close();
+    //             onclose?.();
+    //         } else {
+    //             onmessage?.(Uint8ArrayToString(value));
+    //             controller.enqueue(value);
+    //             push(controller, reader);
+    //         }
+    //     };
 
-        return fetch(url, otherParams).then((response: any) => {
-            const reader = response.body.getReader();
-            return new ReadableStream({
-                start(controller) {
-                    push(controller, reader);
-                }
-            });
-        });
-    };
+    //     return fetch(url, otherParams).then((response: any) => {
+    //         const reader = response.body.getReader();
+    //         return new ReadableStream({
+    //             start(controller) {
+    //                 push(controller, reader);
+    //             }
+    //         });
+    //     });
+    // };
 
-    const stream = await fetchStream(
-        `${process.env.NEXT_PUBLIC_LCEL_FAST_API}/generate/search_documents/tree/stream`,
-        {
-            method: 'POST',
-            body: JSON.stringify(req.body),
-            headers: {
-                Connection: 'keep-alive',
-                accept: 'text/event-stream',
-                'Content-Type': 'application/json'
-            },
-            onmessage: (response: any) => {
-                console.log(response);
-            }
-        }
-    );
-
-    return new StreamingTextResponse(stream);
-    // return res.send(stream);
-
-    // let counter = 0;
-    // const encoder = new TextEncoder();
-    // const decoder = new TextDecoder();
-
-    // const response: any = await fetch(
+    // const stream = await fetchStream(
     //     `${process.env.NEXT_PUBLIC_LCEL_FAST_API}/generate/search_documents/tree/stream`,
     //     {
+    //         method: 'POST',
+    //         body: JSON.stringify(req.body),
     //         headers: {
     //             Connection: 'keep-alive',
     //             accept: 'text/event-stream',
     //             'Content-Type': 'application/json'
     //         },
-    //         method: 'POST',
-    //         body: JSON.stringify(req.body)
+    //         onmessage: (response: any) => {
+    //             console.log(response);
+    //         }
     //     }
     // );
 
-    // const stream = new ReadableStream({
-    //     async start(controller) {
-    //         function onParse(event: ParsedEvent | ReconnectInterval) {
-    //             if (event.type === 'event') {
-    //                 const data = event.data;
-    //                 // console.log(data);
-    //                 if (data === '[DONE]') {
-    //                     controller.close();
-    //                     return;
-    //                 }
-    //                 try {
-    //                     // const json = JSON.parse(data);
-    //                     // console.log(json);
-    //                     // const text = json.choices[0].text;
-    //                     console.log(data);
-    //                     const text = data;
-    //                     // res.write(text);
-    //                     // if (counter < 2 && (text.match(/\n/) || []).length) {
-    //                     //     return;
-    //                     // }
-    //                     const queue = encoder.encode(text);
-    //                     // const queue = encoder.encode(json);
-    //                     controller.enqueue(queue);
-    //                     counter++;
-    //                 } catch (e) {
-    //                     controller.error(e);
-    //                 }
-    //             }
-    //         }
+    // return new StreamingTextResponse(stream);
+    // return res.send(stream);
 
-    //         // stream response (SSE) from OpenAI may be fragmented into multiple chunks
-    //         // this ensures we properly read chunks & invoke an event for each SSE event stream
-    //         const parser = createParser(onParse);
+    let counter = 0;
+    const encoder = new TextEncoder();
+    const decoder = new TextDecoder();
 
-    //         // https://web.dev/streams/#asynchronous-iteration
-    //         for await (const chunk of response.body as any) {
-    //             // console.log('Chunk: ', chunk);
-    //             parser.feed(decoder.decode(chunk));
-    //         }
-    //     }
-    // });
+    const response: any = await fetch(
+        `${process.env.NEXT_PUBLIC_LCEL_FAST_API}/generate/search_documents/tree/stream`,
+        {
+            headers: {
+                Connection: 'keep-alive',
+                accept: 'text/event-stream',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(req.body)
+        }
+    );
+
+    const stream = new ReadableStream({
+        async start(controller) {
+            function onParse(event: ParsedEvent | ReconnectInterval) {
+                if (event.type === 'event') {
+                    const data = event.data;
+                    // console.log(data);
+                    if (data === '[DONE]') {
+                        controller.close();
+                        return;
+                    }
+                    try {
+                        // const json = JSON.parse(data);
+                        // console.log(json);
+                        // const text = json.choices[0].text;
+                        console.log(data);
+                        const text = data;
+                        // res.write(text);
+                        // if (counter < 2 && (text.match(/\n/) || []).length) {
+                        //     return;
+                        // }
+                        const queue = encoder.encode(text);
+                        // const queue = encoder.encode(json);
+                        controller.enqueue(queue);
+                        counter++;
+                    } catch (e) {
+                        controller.error(e);
+                    }
+                }
+            }
+
+            // stream response (SSE) from OpenAI may be fragmented into multiple chunks
+            // this ensures we properly read chunks & invoke an event for each SSE event stream
+            const parser = createParser(onParse);
+
+            // https://web.dev/streams/#asynchronous-iteration
+            for await (const chunk of response.body as any) {
+                // console.log('Chunk: ', chunk);
+                parser.feed(decoder.decode(chunk));
+            }
+        }
+    });
 
     // const stream = new ReadableStream({
     //     async start(controller) {
@@ -168,15 +169,7 @@ export default async function handler(req: NextApiRequest) {
     //     }
     // });
 
-    // const json = await response.text();
+    console.log(stream);
 
-    // console.log(json);
-
-    // res.status(200).send(json);
-
-    // console.log(stream);
-
-    // return new StreamingTextResponse(stream);
-    // streamToResponse(stream, res);
-    // res.status(200).send(stream);
+    return new StreamingTextResponse(stream);
 }
