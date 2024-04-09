@@ -5,7 +5,6 @@ import { useCallback, useEffect, useState } from 'react';
 import Api from '../../apis/index';
 import useAlert from '../../hooks/useAlert';
 import SearchView from './SearchView';
-import { useCompletion } from 'ai/react';
 
 const apiSetting = new Api();
 
