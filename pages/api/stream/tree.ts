@@ -3,10 +3,9 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { createParser, ParsedEvent, ReconnectInterval } from 'eventsource-parser';
 import { StreamingTextResponse } from 'ai';
 
-// export const config = {
-//     supportsResponseStreaming: true,
-//     runtime: 'edge'
-// };
+export const config = {
+    runtime: 'edge'
+};
 
 export default async function handler(req: NextApiRequest) {
     // const Uint8ArrayToString = (fileData: any) => {
