@@ -92,9 +92,9 @@ function SearchContainer() {
                     const response = await fetch('/api/stream/tree', {
                         method: 'POST',
                         headers: {
-                            // accept: 'text/event-stream',
-                            'Content-Type': 'application/json'
-                            // Connection: 'keep-alive'
+                            accept: 'text/event-stream',
+                            'Content-Type': 'application/json',
+                            Connection: 'keep-alive'
                         },
                         body: JSON.stringify({ documents: res.data.documents })
                     });

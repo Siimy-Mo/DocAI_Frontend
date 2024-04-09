@@ -3,9 +3,10 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { createParser, ParsedEvent, ReconnectInterval } from 'eventsource-parser';
 import { StreamingTextResponse } from 'ai';
 
-// export const config = {
-//     runtime: 'edge'
-// };
+export const config = {
+    supportsResponseStreaming: true,
+    runtime: 'edge'
+};
 
 export default async function handler(req: NextApiRequest) {
     // const Uint8ArrayToString = (fileData: any) => {
@@ -92,7 +93,6 @@ export default async function handler(req: NextApiRequest) {
                         // const json = JSON.parse(data);
                         // console.log(json);
                         // const text = json.choices[0].text;
-                        console.log(data);
                         const text = data;
                         // res.write(text);
                         // if (counter < 2 && (text.match(/\n/) || []).length) {
