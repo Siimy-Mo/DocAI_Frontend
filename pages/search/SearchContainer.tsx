@@ -123,10 +123,6 @@ function SearchContainer() {
                             console.error('Stream reading failed:', error);
                         }
                     }
-
-                    // const { complete } = useCompletion({
-                    //     api: '/api/completion',
-                    //   });
                 };
 
                 fetchData();
