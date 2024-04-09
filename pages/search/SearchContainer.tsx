@@ -88,6 +88,7 @@ function SearchContainer() {
             if (res.data) {
                 setOpen(false);
                 const fetchData = async () => {
+                    console.log(res.data.documents);
                     const response = await fetch('/api/stream/tree', {
                         method: 'POST',
                         headers: {
@@ -108,6 +109,7 @@ function SearchContainer() {
                                 const { done, value } = await reader.read();
                                 if (done) break;
                                 const rawData = decoder.decode(value);
+                                console.log('Raw data:', rawData);
                                 const data = rawData.replace(/^data: ?/, '');
                                 let jsonData: any = {};
                                 try {
