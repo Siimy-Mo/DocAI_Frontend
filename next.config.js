@@ -3,7 +3,7 @@ const nextConfig = {
     reactStrictMode: true,
     experimental: {
         serverActions: true
-      },
+    },
     images: {
         domains: ['www.myperfectresume.com']
     },
