@@ -4,9 +4,8 @@ import { createParser, ParsedEvent, ReconnectInterval } from 'eventsource-parser
 import { StreamingTextResponse } from 'ai';
 
 export const config = {
-    supportsResponseStreaming: true,
-    runtime: 'edge',
-    dynamic: 'force-dynamic'
+    supportsResponseStreaming: true
+    // runtime: 'nodejs'
 };
 
 export default async function handler(req: NextApiRequest) {
