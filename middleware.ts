@@ -34,11 +34,16 @@ import type { NextRequest } from 'next/server';
 
 export default function middleware(req: NextRequest) {
     const authorization = req.cookies?.get('authorization');
-    if (authorization || req.url?.includes('/miniapp')) {
+    const url = req.nextUrl.clone();
+
+    if (url.pathname === '/login') {
         return NextResponse.next();
     }
 
-    const url = req.nextUrl.clone();
+    if (authorization || url.pathname.includes('/miniapp')) {
+        return NextResponse.next();
+    }
+
     url.pathname = '/login';
     return NextResponse.redirect(url);
 }
