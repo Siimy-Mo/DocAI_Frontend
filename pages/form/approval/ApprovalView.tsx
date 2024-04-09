@@ -159,19 +159,13 @@ function ApprovalView(props: any) {
                     return (
                         <Link
                             href={`/form/approval/${id.toString()}?form_schema_id=${currentTypeTabStatus}`}
+                            className=" cursor-pointer text-indigo-600 hover:text-indigo-900 underline"
                         >
-                            <a className=" cursor-pointer text-indigo-600 hover:text-indigo-900 underline">
-                                立即審批
-                            </a>
+                            立即審批
                         </Link>
                     );
                 } else {
                     return (
-                        <Link href={`/form/approval/normal/?id=${id.toString()}`}>
-                            <a className=" cursor-pointer text-indigo-600 hover:text-indigo-900 underline">
-                                立即審批
-                            </a>
-                        </Link>
                         // <a
                         //     onClick={() => {
                         //         setAbsenceFormId(id.toString());
@@ -181,6 +175,12 @@ function ApprovalView(props: any) {
                         // >
                         //     立即審批
                         // </a>
+                        <Link
+                            href={`/form/approval/normal/?id=${id.toString()}`}
+                            className=" cursor-pointer text-indigo-600 hover:text-indigo-900 underline"
+                        >
+                            立即審批
+                        </Link>
                     );
                 }
             } else if (approval_status === 'approved') {

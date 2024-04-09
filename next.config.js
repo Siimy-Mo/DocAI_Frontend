@@ -24,7 +24,8 @@ const nextConfig = {
         });
 
         return config;
-    }
+    },
+    swcMinify: true
 };
 
 module.exports = nextConfig;

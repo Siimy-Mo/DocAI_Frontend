@@ -54,10 +54,9 @@ export default function SchemaList(props: Props) {
                                                 ? `/document/extraction/${label?.id}/schema`
                                                 : `/document/extraction/documents/schema`
                                         }
+                                        className=" cursor-pointer block rounded-md  text-center text-sm font-semibold text-indigo-500  hover:text-indigo-700  "
                                     >
-                                        <a className=" cursor-pointer block rounded-md  text-center text-sm font-semibold text-indigo-500  hover:text-indigo-700  ">
-                                            + Schema
-                                        </a>
+                                        + Schema
                                     </Link>
                                 </div>
                             </th>

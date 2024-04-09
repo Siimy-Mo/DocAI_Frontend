@@ -27,8 +27,8 @@ export default function ProjectRow(props: ProjectRowProps) {
         <>
             <tr>
                 <td className="w-4/12 py-4  text-sm font-medium text-gray-900 sm:pl-0">
-                    <Link href={`/project/${project?.id}`}>
-                        <a className="text-indigo-500">{project?.name}</a>
+                    <Link href={`/project/${project?.id}`} className="text-indigo-500">
+                        {project?.name}
                     </Link>
                 </td>
                 <td className="w-1/12 py-4 text-sm text-gray-500">
@@ -43,8 +43,11 @@ export default function ProjectRow(props: ProjectRowProps) {
                     {moment(project?.created_at).format('YYYY-MM-DD HH:ss')}
                 </td>
                 <td className="w-2/12 py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                    <Link href={`/project/edit?id=${project?.id}`}>
-                        <a className="text-indigo-600 hover:text-indigo-900">編輯</a>
+                    <Link
+                        href={`/project/edit?id=${project?.id}`}
+                        className="text-indigo-600 hover:text-indigo-900"
+                    >
+                        編輯
                     </Link>
                 </td>
             </tr>

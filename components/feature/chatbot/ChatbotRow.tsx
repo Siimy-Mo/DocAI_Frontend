@@ -28,8 +28,8 @@ export default function ChatbotRow(props: ChatbotRowProps) {
         <>
             <tr>
                 <td className="w-3/12 py-4  text-sm font-medium text-gray-900 sm:pl-0">
-                    <Link href={`/chatbot/${chatbot?.id}`}>
-                        <a className="text-indigo-500">{chatbot?.name}</a>
+                    <Link href={`/chatbot/${chatbot?.id}`} className="text-indigo-500">
+                        {chatbot?.name}
                     </Link>
                 </td>
                 <td className="w-2/12py-4 text-sm text-gray-500">{chatbot?.description}</td>
@@ -75,26 +75,26 @@ export default function ChatbotRow(props: ChatbotRowProps) {
                         }}
                     />
                     {/* <label
-                        className=" cursor-pointer text-indigo-600 hover:text-indigo-900"
-                        onClick={() => {
-                            share(chatbot);
-                        }}
-                    >
-                        分享<span className="sr-only">, Lindsay Walton</span>
-                    </label>
-                    {'  | '}
-                    <Link href={`/chatbot/create?id=${chatbot?.id}`}>
-                        <a className="text-indigo-600 hover:text-indigo-900">編輯</a>
-                    </Link>
-                    {'  | '}
-                    <a
-                        className="text-red-600 hover:text-red-900 cursor-pointer"
-                        onClick={() => {
-                            remove(chatbot);
-                        }}
-                    >
-                        删除
-                    </a> */}
+                    className=" cursor-pointer text-indigo-600 hover:text-indigo-900"
+                    onClick={() => {
+                        share(chatbot);
+                    }}
+                >
+                    分享<span className="sr-only">, Lindsay Walton</span>
+                </label>
+                {'  | '}
+                <Link href={`/chatbot/create?id=${chatbot?.id}`}>
+                    <a className="text-indigo-600 hover:text-indigo-900">編輯</a>
+                </Link>
+                {'  | '}
+                <a
+                    className="text-red-600 hover:text-red-900 cursor-pointer"
+                    onClick={() => {
+                        remove(chatbot);
+                    }}
+                >
+                    删除
+                </a> */}
                 </td>
             </tr>
         </>

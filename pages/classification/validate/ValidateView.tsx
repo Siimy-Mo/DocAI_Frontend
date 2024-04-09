@@ -126,10 +126,10 @@ function ValidateView(props: ValidateViewProps) {
                                 文檔的處理
                             </label>
                             {/* <Link href={'/classification/show'}>
-                                <a className='text-indigo-600 underline ml-4'>查看</a>
-                            </Link> */}
+                        <a className='text-indigo-600 underline ml-4'>查看</a>
+                    </Link> */}
                         </div>
-                        <Link href={'/classification/logs'}>
+                        <Link href={'/classification/logs'} legacyBehavior>
                             <XMarkIcon className=" cursor-pointer w-8 h-8" />
                         </Link>
                     </div>
@@ -290,9 +290,9 @@ function ValidateView(props: ValidateViewProps) {
                                                             <div className="font-bold text-sm flex items-center">
                                                                 <span>
                                                                     {/* {_get(
-                                                                        latestPredictionData,
-                                                                        'prediction.tag.name'
-                                                                    )} */}
+                                                                latestPredictionData,
+                                                                'prediction.tag.name'
+                                                            )} */}
                                                                     {tagName}
                                                                 </span>
                                                             </div>

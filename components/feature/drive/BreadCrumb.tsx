@@ -16,8 +16,8 @@ export default function BreadCrumb(props: BreadCrumbProps) {
     return (
         <div className="flex">
             <div className={`py-2 ${!id ? 'rounded-lg font-bold' : 'text-gray-600'}`}>
-                <Link href={`/drive`}>
-                    <a className="hover:underline">Root</a>
+                <Link href={`/drive`} className="hover:underline">
+                    Root
                 </Link>
             </div>
             {ancestors &&
@@ -28,10 +28,11 @@ export default function BreadCrumb(props: BreadCrumbProps) {
                         return (
                             <div key={ancestor.id} className="flex items-center">
                                 <ChevronRightIcon className="text-gray-400 h-5 mx-1" />
-                                <Link href={`/drive/${ancestor.id}?name=${ancestor.name}`}>
-                                    <a className="hover:underline py-2 text-gray-600">
-                                        {ancestor.name}
-                                    </a>
+                                <Link
+                                    href={`/drive/${ancestor.id}?name=${ancestor.name}`}
+                                    className="hover:underline py-2 text-gray-600"
+                                >
+                                    {ancestor.name}
                                 </Link>
                             </div>
                         );

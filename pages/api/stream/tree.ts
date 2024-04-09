@@ -12,11 +12,11 @@ export const config = {
     dynamic: 'force-dynamic'
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    res.setHeader('Content-Type', 'application/json');
-    res.setHeader('Cache-Control', 'no-cache, no-transform');
-    res.setHeader('Connection', 'keep-alive');
-    res.setHeader('accept', 'text/event-stream');
+export default async function handler(req: NextApiRequest) {
+    // res.setHeader('Content-Type', 'application/json');
+    // res.setHeader('Cache-Control', 'no-cache, no-transform');
+    // res.setHeader('Connection', 'keep-alive');
+    // res.setHeader('accept', 'text/event-stream');
     // const Uint8ArrayToString = (fileData: any) => {
     //     const utf8 = Array.from(fileData)
     //         .map((item: any) => String.fromCharCode(item))
@@ -184,7 +184,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     console.log(stream);
 
-    // return new StreamingTextResponse(stream);
-    streamToResponse(stream, res);
+    return new StreamingTextResponse(stream);
+    // streamToResponse(stream, res);
     // res.status(200).send(stream);
 }

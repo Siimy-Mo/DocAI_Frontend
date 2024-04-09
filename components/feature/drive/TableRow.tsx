@@ -115,8 +115,8 @@ export default function TableRow(props: TableRowProps) {
             </div>
             <div className="px-2 py-4 text-left w-5/12">
                 {type === 'folders' ? (
-                    <Link href={`${url}?name=${doc.name}`}>
-                        <a className="hover:underline">{doc.name}</a>
+                    <Link href={`${url}?name=${doc.name}`} className="hover:underline">
+                        {doc.name}
                     </Link>
                 ) : (
                     <a href={url} target="_blank" rel="noreferrer" className="hover:underline">

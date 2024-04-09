@@ -12,8 +12,8 @@ export default function MiniappRow(props: MiniappRowProps) {
         <>
             <tr>
                 <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                    <Link href={`/miniapp/${item?.id}`}>
-                        <a className="text-indigo-500">{item?.name}</a>
+                    <Link href={`/miniapp/${item?.id}`} className="text-indigo-500">
+                        {item?.name}
                     </Link>
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -35,10 +35,11 @@ export default function MiniappRow(props: MiniappRowProps) {
                         分享<span className="sr-only">, Lindsay Walton</span>
                     </label>
                     {'  | '}
-                    <Link href={`/miniapp/create?id=${item?.id}`}>
-                        <a className="text-indigo-600 hover:text-indigo-900">
-                            編輯<span className="sr-only">, Lindsay Walton</span>
-                        </a>
+                    <Link
+                        href={`/miniapp/create?id=${item?.id}`}
+                        className="text-indigo-600 hover:text-indigo-900"
+                    >
+                        編輯<span className="sr-only">, Lindsay Walton</span>
                     </Link>
                 </td>
             </tr>

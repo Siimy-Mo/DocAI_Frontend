@@ -105,7 +105,7 @@ function ValidateView(props: ShowViewProps) {
                 <header className="shadow bg-white">
                     <div className="   py-6 px-4 sm:px-6 lg:px-8  flex justify-between">
                         <h1 className="text-3xl font-bold text-gray-900">查看文檔</h1>
-                        <Link href={'/classification/logs'}>
+                        <Link href={'/classification/logs'} legacyBehavior>
                             <XMarkIcon className=" cursor-pointer w-8 h-8" />
                         </Link>
                     </div>
@@ -118,25 +118,25 @@ function ValidateView(props: ShowViewProps) {
                                 <div className="h-full left-side flex-1 flex justify-center items-center object-contain object-center">
                                     <div className="w-full h-full flex flex-col justify-center">
                                         {/* <p>
-                                            文檔名稱:{' '}
-                                            <span className="font-bold">
-                                                {_get(
-                                                    latestPredictionData,
-                                                    'prediction.document.name'
-                                                )}
-                                            </span>
-                                        </p>
-                                        <p className="mb-1">
-                                            上傳日期:{' '}
-                                            <span className="font-bold">
-                                                {
-                                                    _get(
-                                                        latestPredictionData,
-                                                        'prediction.document.created_at'
-                                                    )?.split('T')[0]
-                                                }
-                                            </span>
-                                        </p> */}
+                                    文檔名稱:{' '}
+                                    <span className="font-bold">
+                                        {_get(
+                                            latestPredictionData,
+                                            'prediction.document.name'
+                                        )}
+                                    </span>
+                                </p>
+                                <p className="mb-1">
+                                    上傳日期:{' '}
+                                    <span className="font-bold">
+                                        {
+                                            _get(
+                                                latestPredictionData,
+                                                'prediction.document.created_at'
+                                            )?.split('T')[0]
+                                        }
+                                    </span>
+                                </p> */}
                                         <div className="w-5/6 h-full rounded-lg object-cover">
                                             {_get(
                                                 latestPredictionData,
@@ -257,9 +257,9 @@ function ValidateView(props: ShowViewProps) {
                                                             <div className="font-bold text-sm flex items-center">
                                                                 <span>
                                                                     {/* {_get(
-                                                                        latestPredictionData,
-                                                                        'prediction.tag.name'
-                                                                    )} */}
+                                                                latestPredictionData,
+                                                                'prediction.tag.name'
+                                                            )} */}
                                                                     {tagName}
                                                                 </span>
                                                             </div>
@@ -301,25 +301,25 @@ function ValidateView(props: ShowViewProps) {
                                 </div>
                             </div>
                             {/* <div className="flex w-full items-center justify-center object-center bg-white pb-4 mt-2">
-                                <div className="items-center">
-                                    { ['1','2','3'].map((item: any, index: number) => {
-                                        return (
-                                            <button
-                                                key={index}
-                                                type="button"
-                                                className={classNames(
-                                                    1 == 1 
-                                                    ? "text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500" 
-                                                    : 'text-black bg-white border border-gray-600 hover:bg-gray-100 focus:ring-gray-500',
-                                                    "mr-4 items-center w-8 h-8 text-center border border-transparent shadow-sm text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 "
-                                                )}
-                                            >
-                                                { index + 1 }
-                                            </button>
-                                        )
-                                    })}
-                                </div>
-                            </div> */}
+                        <div className="items-center">
+                            { ['1','2','3'].map((item: any, index: number) => {
+                                return (
+                                    <button
+                                        key={index}
+                                        type="button"
+                                        className={classNames(
+                                            1 == 1 
+                                            ? "text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500" 
+                                            : 'text-black bg-white border border-gray-600 hover:bg-gray-100 focus:ring-gray-500',
+                                            "mr-4 items-center w-8 h-8 text-center border border-transparent shadow-sm text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 "
+                                        )}
+                                    >
+                                        { index + 1 }
+                                    </button>
+                                )
+                            })}
+                        </div>
+                    </div> */}
                         </div>
                     </div>
                 </main>

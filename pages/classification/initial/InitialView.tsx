@@ -19,11 +19,15 @@ function InitialView() {
                                         <Image
                                             width={100}
                                             height={100}
-                                            layout="responsive"
-                                            objectFit="contain"
-                                            objectPosition="center"
                                             src="https://www.myperfectresume.com/wp-content/uploads/2021/07/human-resources-manager-cv-sample.svg"
                                             alt="Workflow"
+                                            sizes="100vw"
+                                            style={{
+                                                width: '100%',
+                                                height: 'auto',
+                                                objectFit: 'contain',
+                                                objectPosition: 'center'
+                                            }}
                                         />
                                     </div>
                                 </div>
