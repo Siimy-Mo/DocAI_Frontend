@@ -34,8 +34,11 @@ import type { NextRequest } from 'next/server';
 
 export default function middleware(req: NextRequest) {
     const authorization = req.cookies?.get('authorization');
-    if (authorization || req.url?.indexOf('/miniapp') != -1) {
+    if (authorization || req.url?.includes('/miniapp')) {
         return NextResponse.next();
     }
-    return NextResponse.redirect('/login');
+
+    const url = req.nextUrl.clone();
+    url.pathname = '/login';
+    return NextResponse.redirect(url);
 }
