@@ -1,7 +1,7 @@
 // pages/api/tree.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createParser, ParsedEvent, ReconnectInterval } from 'eventsource-parser';
-import { StreamingTextResponse, streamToResponse } from 'ai';
+import { StreamingTextResponse } from 'ai';
 
 export const runtime = 'edge'; // or 'nodejs' which uses Serverless Functions
 export const dynamic = 'force-dynamic'; // always run dynamically
