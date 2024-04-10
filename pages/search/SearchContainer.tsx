@@ -127,41 +127,6 @@ function SearchContainer() {
                     }
                 };
 
-                // const fetchData = async () => {
-                //     let active = true;
-                //     const maxAttempts = 3;
-                //     let attempts = 0;
-
-                //     while (active && attempts < maxAttempts) {
-                //         try {
-                //             const response: any = await fetch('/api/stream/tree', {
-                //                 method: 'POST',
-                //                 headers: {
-                //                     'Content-Type': 'application/json',
-                //                     Connection: 'keep-alive',
-                //                     Accept: 'text/event-stream',
-                //                 },
-                //                 body: JSON.stringify({ documents: res.data.documents })
-                //             });
-
-                //             const reader = response.body.getReader();
-                //             attempts = 0;  // 重置尝试次数
-
-                //             while (true) {
-                //                 const { done, value } = await reader.read();
-                //                 if (done) break;
-                //                 console.log('Data:', new TextDecoder().decode(value));
-                //                 // 处理数据...
-                //             }
-                //             active = false;  // 成功完成，退出循环
-                //         } catch (error) {
-                //             attempts++;
-                //             console.error('Attempt', attempts, 'failed:', error);
-                //             await new Promise(resolve => setTimeout(resolve, 1000 * attempts));  // 简单的退避策略
-                //         }
-                //     }
-                // };
-
                 fetchData();
             }
         }
@@ -212,7 +177,6 @@ function SearchContainer() {
 
     useEffect(() => {
         if (addNewLabelData && addNewLabelData.success) {
-            // setAlert({ title: '新增成功', type: 'success' });
             setNewLabelName('');
             confirmDocumentFormik.setFieldValue('tag_id', addNewLabelData.tag.id);
             confirmDocumentFormik.handleSubmit();
@@ -250,42 +214,47 @@ function SearchContainer() {
     }, [getLabelByIdData]);
 
     useEffect(() => {
-        if (router.query.date) {
-            searchDocumentFormik.setValues({
-                date: router.query.date + '',
-                content: '',
-                tag_id: '',
-                from: '',
-                to: '',
-                page: parseInt(router.query.page + '') || 1
-            });
-            searchDocumentFormik.handleSubmit();
-        } else if (router.query.tag_id) {
-            searchDocumentFormik.setValues({
-                content: router.query.content + '',
-                date: '',
-                tag_id: router.query.tag_id + '',
-                from: router.query.from + '',
-                to: router.query.to + '',
-                page: parseInt(router.query.page + '') || 1
-            });
-            searchDocumentFormik.handleSubmit();
+        if (router) {
+            console.log(router.query);
+            console.log(router);
+            if (router.query.date) {
+                searchDocumentFormik.setValues({
+                    date: router.query.date + '',
+                    content: '',
+                    tag_id: '',
+                    from: '',
+                    to: '',
+                    page: parseInt(router.query.page + '') || 1
+                });
+                searchDocumentFormik.handleSubmit();
+            } else if (router.query.tag_id) {
+                searchDocumentFormik.setValues({
+                    content: router.query.content + '',
+                    date: '',
+                    tag_id: router.query.tag_id + '',
+                    from: router.query.from + '',
+                    to: router.query.to + '',
+                    page: parseInt(router.query.page + '') || 1
+                });
+                searchDocumentFormik.handleSubmit();
 
-            getLabelById({
-                ...apiSetting.Tag.getTagById(router.query.tag_id as string)
-            });
-        } else {
-            searchDocumentFormik.setValues({
-                content: router.query.content + '',
-                date: '',
-                tag_id: '',
-                from: '',
-                to: '',
-                page: parseInt(router.query.page + '') || 1
-            });
-            searchDocumentFormik.handleSubmit();
+                getLabelById({
+                    ...apiSetting.Tag.getTagById(router.query.tag_id as string)
+                });
+            } else {
+                searchDocumentFormik.setValues({
+                    content: router.query.content + '',
+                    date: '',
+                    tag_id: '',
+                    from: '',
+                    to: '',
+                    page: parseInt(router.query.page + '') || 1
+                });
+                searchDocumentFormik.handleSubmit();
+            }
         }
-    }, [router]);
+    }, []);
+
     return (
         <>
             <SearchView

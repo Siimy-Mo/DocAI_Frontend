@@ -1,5 +1,4 @@
 // pages/api/tree.ts
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { createParser, ParsedEvent, ReconnectInterval } from 'eventsource-parser';
 import { StreamingTextResponse } from 'ai';
 
@@ -11,11 +10,6 @@ export default async function handler(req: Request) {
     let counter = 0;
     const encoder = new TextEncoder();
     const decoder = new TextDecoder();
-
-    // const documents = (await req.json()) || {};
-
-    console.log('Req Body:');
-    // console.log(documents);
 
     const response: any = await fetch(
         `${process.env.NEXT_PUBLIC_LCEL_FAST_API}/generate/search_documents/tree/stream`,
@@ -41,16 +35,8 @@ export default async function handler(req: Request) {
                         return;
                     }
                     try {
-                        // const json = JSON.parse(data);
-                        // console.log(json);
-                        // const text = json.choices[0].text;
                         const text = data;
-                        // res.write(text);
-                        // if (counter < 2 && (text.match(/\n/) || []).length) {
-                        //     return;
-                        // }
                         const queue = encoder.encode(text);
-                        // const queue = encoder.encode(json);
                         controller.enqueue(queue);
                         counter++;
                     } catch (e) {
