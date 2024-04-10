@@ -88,7 +88,6 @@ function SearchContainer() {
             if (res.data) {
                 setOpen(false);
                 const fetchData = async () => {
-                    console.log(res.data.documents);
                     const response = await fetch('/api/stream/tree', {
                         method: 'POST',
                         headers: {

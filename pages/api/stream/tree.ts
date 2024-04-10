@@ -7,7 +7,6 @@ export const config = {
 };
 
 export default async function handler(req: Request) {
-    let counter = 0;
     const encoder = new TextEncoder();
     const decoder = new TextDecoder();
 
@@ -37,7 +36,6 @@ export default async function handler(req: Request) {
                         const text = data;
                         const queue = encoder.encode(text);
                         controller.enqueue(queue);
-                        counter++;
                     } catch (e) {
                         controller.error(e);
                     }
@@ -50,7 +48,6 @@ export default async function handler(req: Request) {
 
             // https://web.dev/streams/#asynchronous-iteration
             for await (const chunk of response.body as any) {
-                // console.log('Chunk: ', chunk);
                 parser.feed(decoder.decode(chunk));
             }
         }
