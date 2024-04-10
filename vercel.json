@@ -4,7 +4,7 @@
             "memory": 3009,
             "maxDuration": 300
         },
-        "api/stream/tree.ts": {
+        "pages/api/**/*.ts": {
             "memory": 3009,
             "maxDuration": 300
         }
