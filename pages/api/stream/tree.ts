@@ -5,7 +5,6 @@ import { StreamingTextResponse } from 'ai';
 
 export const config = {
     runtime: 'edge',
-    dynamic: 'force-dynamic'
 };
 
 export default async function handler(req: Request) {
