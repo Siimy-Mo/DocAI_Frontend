@@ -12,10 +12,10 @@ export default async function handler(req: Request) {
     const encoder = new TextEncoder();
     const decoder = new TextDecoder();
 
-    const documents = (await req.json()) || {};
+    // const documents = (await req.json()) || {};
 
     console.log('Req Body:');
-    console.log(documents);
+    // console.log(documents);
 
     const response: any = await fetch(
         `${process.env.NEXT_PUBLIC_LCEL_FAST_API}/generate/search_documents/tree/stream`,
@@ -26,7 +26,7 @@ export default async function handler(req: Request) {
                 'Content-Type': 'application/json'
             },
             method: 'POST',
-            body: JSON.stringify(documents)
+            body: JSON.stringify(await req.json())
         }
     );
 
