@@ -29,7 +29,6 @@ export default async function handler(req: Request) {
             function onParse(event: ParsedEvent | ReconnectInterval) {
                 if (event.type === 'event') {
                     const data = event.data;
-                    // console.log(data);
                     if (data === '[DONE]') {
                         controller.close();
                         return;
