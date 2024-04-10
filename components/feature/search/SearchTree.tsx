@@ -9,7 +9,7 @@ interface SearchRowProps {
     tree?: any;
 }
 
-const tree = [
+const trees = [
     {
         subtree_title: 'DocAI - Roy Ho',
         children: [
@@ -116,7 +116,7 @@ export default function SearchRow(props: SearchRowProps) {
                         check(e);
                     }}
                 />
-                <div className="mt-2 flex justify-center items-center">
+                <div className="mt-2 flex justify-center items-center" id={document.id}>
                     <a href={document.storage_url} className="text-center">
                         <p className="relative text-gray-900 text-center text-sm border-b-2 border-gray-500">
                             {document.name}
@@ -153,37 +153,6 @@ export default function SearchRow(props: SearchRowProps) {
         );
     };
 
-    // const ifChildren = (document: any, deep: number) => {
-    //     //判断是否为最后一层
-    //     if (document?.subtree_title) {
-    //         // 存在title则还需要遍历child
-    //         // console.log(deep, node?.subtree_title)
-    //         return (
-    //             <>
-    //                 <div
-    //                     className={
-    //                         deep == 0
-    //                             ? 'text-black font-bold text-l border-b-2 border-black'
-    //                             : 'text-black border-b-2 border-black'
-    //                     }
-    //                 >
-    //                     {document?.subtree_title}
-    //                 </div>
-    //                 <div
-    //                     className={
-    //                         document?.children[0]?.subtree_title ? 'flex flex-col' : 'flex flex-row'
-    //                     }
-    //                 >
-    //                     {document?.children?.map((child: any) => ifChildren(child, deep + 1))}
-    //                 </div>
-    //             </>
-    //         );
-    //     } else {
-    //         // console.log(deep, document.name)  //没有title，最后一层输出name
-    //         return ChildrenRow(document);
-    //     }
-    // };
-
     const ifChildren = (document: any, deep: number) => {
         // 判断是否为最后一层
         if (document?.subtree_title) {
@@ -206,7 +175,7 @@ export default function SearchRow(props: SearchRowProps) {
                             document.children.length > 0 &&
                             document.children[0]?.subtree_title
                                 ? 'flex flex-col'
-                                : 'flex flex-row'
+                                : 'flex flex-row flex-wrap'
                         }
                     >
                         {document?.children?.map((child: any) => ifChildren(child, deep + 1))}
@@ -304,71 +273,17 @@ export default function SearchRow(props: SearchRowProps) {
                         </span>
                     </>
                 )}
+                <a href={'#'+item.id}>
                 {item.name}
+                </a>
             </li>
         );
     };
 
-    const TreeNav = (document: any, deep: number) => {
-        //判断是否为最后一层
-        console.log(deep, document);
-        if (document.subtree_title) {
-            // 存在title则还需要遍历child
-            if (deep === 0) {
-                return (
-                    <>
-                        <div className="py-1 mt-2 font-bold text-neutral-900 leading-[2]">
-                            {document?.subtree_title}
-                        </div>
-                        {document.children.map((child: any) => TreeNav(child, deep + 1))}
-                    </>
-                );
-            } else {
-                return (
-                    <>
-                        <div className="my-0.5 leading-[1.1]">
-                            {navBefore(deep)}
-                            {document?.subtree_title}
-                        </div>
-                        {document.children.map((child: any) => TreeNav(child, deep + 1))}
-                    </>
-                );
-            }
-        } else {
-            return (
-                <div>
-                    {navBefore(deep)}
-                    {document.name}
-                </div>
-            );
-        }
-    };
-
-    const navBefore = (deep: number) => {
-        if (deep == 1) {
-            return (
-                <span className="font-mono font-bold text-neutral-200 leading-[1.1] text-xl">
-                    └─
-                </span>
-            );
-        } else {
-            // 大于1的情况
-            return (
-                <>
-                    <span className="font-mono font-bold text-neutral-200 leading-[1.1] text-xl">
-                        │&nbsp;
-                    </span>
-                    <span className="font-mono font-bold text-neutral-200 leading-[1.1] text-xl">
-                        └─
-                    </span>
-                </>
-            );
-        }
-    };
 
     return (
         <>
-            <div className="flex">
+            <div className="flex scroll-smooth">
                 <div className="text-sm bg-white shadow-md border-[1.5px] border-neutral-300 rounded-[2px] pr-2 py-2 max-w-64 pl-5 pt-2">
                     <ul className={'menu py-1 mt-2 font-bold text-neutral-900 leading-[2]'}>
                         {tree.map((item: any, index: number) => (
