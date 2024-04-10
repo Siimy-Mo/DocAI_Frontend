@@ -127,6 +127,41 @@ function SearchContainer() {
                     }
                 };
 
+                // const fetchData = async () => {
+                //     let active = true;
+                //     const maxAttempts = 3;
+                //     let attempts = 0;
+
+                //     while (active && attempts < maxAttempts) {
+                //         try {
+                //             const response: any = await fetch('/api/stream/tree', {
+                //                 method: 'POST',
+                //                 headers: {
+                //                     'Content-Type': 'application/json',
+                //                     Connection: 'keep-alive',
+                //                     Accept: 'text/event-stream',
+                //                 },
+                //                 body: JSON.stringify({ documents: res.data.documents })
+                //             });
+
+                //             const reader = response.body.getReader();
+                //             attempts = 0;  // 重置尝试次数
+
+                //             while (true) {
+                //                 const { done, value } = await reader.read();
+                //                 if (done) break;
+                //                 console.log('Data:', new TextDecoder().decode(value));
+                //                 // 处理数据...
+                //             }
+                //             active = false;  // 成功完成，退出循环
+                //         } catch (error) {
+                //             attempts++;
+                //             console.error('Attempt', attempts, 'failed:', error);
+                //             await new Promise(resolve => setTimeout(resolve, 1000 * attempts));  // 简单的退避策略
+                //         }
+                //     }
+                // };
+
                 fetchData();
             }
         }
