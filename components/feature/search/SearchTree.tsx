@@ -121,9 +121,6 @@ export default function SearchRow(props: SearchRowProps) {
                         <p className="relative text-gray-900 text-center text-sm border-b-2 border-gray-500">
                             {document.name}
                         </p>
-                        {/* <p className="relative text-gray-400  text-center text-xs">
-                            {document.created_at.split('T')[0]}
-                        </p> */}
                     </a>
                 </div>
                 <div className="w-3/4 h-40 rounded-md overflow-hidden group-hover:opacity-75">
@@ -291,7 +288,6 @@ export default function SearchRow(props: SearchRowProps) {
 
                 <div className="flex flex-col pl-0.5 sm:ml-5 px-1">
                     {tree.map((children: any, index: number) => {
-                        // console.log(index + children.subtree_title)
                         return (
                             <div key={index} className="">
                                 {ifChildren(children, 0)}
