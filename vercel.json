@@ -2,7 +2,7 @@
     "functions": {
         "pages/api/stream/tree.ts": {
             "memory": 3009,
-            "maxDuration": 900
+            "maxDuration": 300
         }
     }
 }
