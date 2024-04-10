@@ -273,13 +273,10 @@ export default function SearchRow(props: SearchRowProps) {
                         </span>
                     </>
                 )}
-                <a href={'#'+item.id}>
-                {item.name}
-                </a>
+                <a href={'#' + item.id}>{item.name}</a>
             </li>
         );
     };
-
 
     return (
         <>
