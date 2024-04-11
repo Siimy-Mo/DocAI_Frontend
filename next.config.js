@@ -4,9 +4,9 @@ const nextConfig = {
     experimental: {
         serverActions: true
     },
-    future: {
-        webpack5: true
-    },
+    // future: {
+    //     webpack5: true
+    // },
     images: {
         domains: ['www.myperfectresume.com']
     },
