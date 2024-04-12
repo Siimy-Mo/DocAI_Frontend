@@ -220,8 +220,11 @@ export default function SearchLabelSearchForm(props: Props) {
                         <div className="flex flex-row justify-between  pr-2">
                             <label className="text-md ">標籤:</label>
 
-                            <Link href={'/setting/label'}>
-                                <a className="text-md  underline text-blue-500">標籤管理</a>
+                            <Link
+                                href={'/setting/label'}
+                                className="text-md  underline text-blue-500"
+                            >
+                                標籤管理
                             </Link>
                         </div>
 

@@ -1,11 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true,
+    reactStrictMode: false,
+    experimental: {
+        serverActions: true
+    },
+    // future: {
+    //     webpack5: true
+    // },
     images: {
         domains: ['www.myperfectresume.com']
-    },
-    future: {
-        webpack5: true
     },
     webpack: (config) => {
         // load worker files as a urls with `file-loader`

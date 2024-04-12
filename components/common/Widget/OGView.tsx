@@ -15,8 +15,7 @@ export default function OGView(props: OGProps) {
     return (
         <>
             <p className='border-l-4 pl-2 border-l-gray-500 text-sm"'>文檔放在這裡</p>
-            {/* eslint-disable-next-line @next/next/link-passhref */}
-            <Link href={props.url}>
+            <Link href={props.url} legacyBehavior>
                 <div className="w-full border border-gray-200 p-2 mt-2 flex flex-row cursor-pointer">
                     <div className=" flex flex-1 w-full description">
                         <p className="line_1">{props?.title}</p>
@@ -60,28 +59,28 @@ export default function OGView(props: OGProps) {
             </Link>
             <style>
                 {`
-                    .description {
-                        overflow: hidden;
-                        display: -webkit-box;
-                        -webkit-box-orient: vertical;
-                    }
-                    .line_1 {
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 1; //多行在这里修改数字即可
-                        overflow: hidden;
-                        -webkit-box-orient: vertical;
-                    }
-                    .line_2 {
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 2; //多行在这里修改数字即可
-                        overflow: hidden;
-                        -webkit-box-orient: vertical;
-                    }
-                `}
+                .description {
+                    overflow: hidden;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                }
+                .line_1 {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1; //多行在这里修改数字即可
+                    overflow: hidden;
+                    -webkit-box-orient: vertical;
+                }
+                .line_2 {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2; //多行在这里修改数字即可
+                    overflow: hidden;
+                    -webkit-box-orient: vertical;
+                }
+            `}
             </style>
         </>
     );

@@ -14,7 +14,7 @@ export default function ExtractSchemaRow(props: ChatbotRowProps) {
         <>
             <tr className=" ">
                 <td className=" flex-row w-34/12 py-4   text-sm font-medium text-gray-900 sm:pl-0">
-                    <Link href={`/document/smart_extraction_schema/${schema?.id}`}>
+                    <Link href={`/document/smart_extraction_schema/${schema?.id}`} legacyBehavior>
                         <div className="flex flex-row cursor-pointer">
                             <TableCellsIcon className="mr-1 w-5 h-5" />
                             <a className="text-indigo-500">{schema?.name}</a>
@@ -35,8 +35,9 @@ export default function ExtractSchemaRow(props: ChatbotRowProps) {
                                 ? `/document/extraction/${schema?.label_id}/schema?schema_id=${schema?.id}`
                                 : `/document/extraction/documents/schema?schema_id=${schema?.id}`
                         }
+                        className="text-indigo-600 hover:text-indigo-900"
                     >
-                        <a className="text-indigo-600 hover:text-indigo-900">編輯</a>
+                        編輯
                     </Link>
                 </td>
             </tr>

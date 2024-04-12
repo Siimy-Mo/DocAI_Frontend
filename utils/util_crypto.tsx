@@ -1,4 +1,3 @@
-'use client';
 import crypto from 'crypto';
 import _ from 'lodash';
 

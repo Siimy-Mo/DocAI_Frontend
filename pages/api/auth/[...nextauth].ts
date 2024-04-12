@@ -116,7 +116,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
-                                Authorization: req.cookies.authorization
+                                Authorization: req.cookies.authorization || '' // Add default value for Authorization
                             },
                             body: JSON.stringify(params)
                         }

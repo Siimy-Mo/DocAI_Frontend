@@ -60,7 +60,7 @@ function HeadNav(props: any) {
                             <div className="flex items-center justify-between h-16">
                                 <div className="flex items-center w-full">
                                     <div className="flex-shrink-0">
-                                        <Link href="/" passHref>
+                                        <Link href="/" passHref legacyBehavior>
                                             <p className="text-white text-2xl font-bold cursor-pointer">
                                                 DocAI
                                             </p>

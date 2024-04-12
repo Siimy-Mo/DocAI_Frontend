@@ -22,11 +22,13 @@ function SearchFormView(props: SearchFormViewProps) {
                     <div className="flex float-row flex-wrap">
                         {forms.map((item, index) => {
                             return (
-                                <Link href={`/search/form/schema/${item.id}`} key={index}>
-                                    <a className="p-8 hover:bg-gray-100  items-center text-center">
-                                        <DocumentMagnifyingGlassIcon className="w-20 h-20" />
-                                        <p className="w-20">{item.name}</p>
-                                    </a>
+                                <Link
+                                    href={`/search/form/schema/${item.id}`}
+                                    key={index}
+                                    className="p-8 hover:bg-gray-100  items-center text-center"
+                                >
+                                    <DocumentMagnifyingGlassIcon className="w-20 h-20" />
+                                    <p className="w-20">{item.name}</p>
                                 </Link>
                             );
                         })}

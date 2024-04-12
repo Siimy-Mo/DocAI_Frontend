@@ -237,27 +237,27 @@ export default function GenerateView(props: GenerateViewProps) {
                                         </>
                                     )}
                                     {/* {document?.storage_url?.split('.').pop() === 'pdf' ? (
-                                        <object
-                                            className="object-center object-cover w-full h-full flex justify-center items-center"
-                                            type="application/pdf"
-                                            data={document?.storage_url + '#toolbar=0'}
-                                            width="250"
-                                        >
-                                            <img
-                                                src={
-                                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/833px-PDF_file_icon.svg.png'
-                                                }
-                                                alt="PDF file icon"
-                                                className="w-1/2 h-1/2 object-contain object-center"
-                                            />
-                                        </object>
-                                    ) : (
-                                        <img
-                                            className="w-full h-full object-contain object-center lg:w-full lg:h-full"
-                                            src={document?.storage_url}
-                                            alt={document?.storage_url}
-                                        />
-                                    )} */}
+                                <object
+                                    className="object-center object-cover w-full h-full flex justify-center items-center"
+                                    type="application/pdf"
+                                    data={document?.storage_url + '#toolbar=0'}
+                                    width="250"
+                                >
+                                    <img
+                                        src={
+                                            'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/833px-PDF_file_icon.svg.png'
+                                        }
+                                        alt="PDF file icon"
+                                        className="w-1/2 h-1/2 object-contain object-center"
+                                    />
+                                </object>
+                            ) : (
+                                <img
+                                    className="w-full h-full object-contain object-center lg:w-full lg:h-full"
+                                    src={document?.storage_url}
+                                    alt={document?.storage_url}
+                                />
+                            )} */}
                                 </div>
                             </div>
                             <div className="p-4 w-3/5 right-side flex-1 flex flex-col overflow-auto h-full">

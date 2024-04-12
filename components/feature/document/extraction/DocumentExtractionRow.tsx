@@ -58,11 +58,12 @@ export default function DocumentExtractionRow(props: RowProps) {
                     onMouseLeave();
                 }}
             >
-                <Link href={`/search?content=&tag_id=${label?.id}&from=&to=`}>
-                    <a className=" items-center text-center">
-                        <DocumentMagnifyingGlassIcon className="w-20 h-20" />
-                        <p className="w-20">{label.name}</p>
-                    </a>
+                <Link
+                    href={`/search?content=&tag_id=${label?.id}&from=&to=`}
+                    className=" items-center text-center"
+                >
+                    <DocumentMagnifyingGlassIcon className="w-20 h-20" />
+                    <p className="w-20">{label.name}</p>
                 </Link>
                 {visible && (
                     <div className="absolute top-3 right-3 w-6 h-6">

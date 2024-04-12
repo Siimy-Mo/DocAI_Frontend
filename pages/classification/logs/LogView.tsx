@@ -64,18 +64,18 @@ function LogView(props: any) {
                                                         item.confirmed_count && (
                                                         <Link
                                                             href={`/classification/validate?date=${item.date}`}
+                                                            className="p-2 text-sm underline text-indigo-500"
                                                         >
-                                                            <a className="p-2 text-sm underline text-indigo-500">
-                                                                繼續處理
-                                                            </a>
+                                                            繼續處理
                                                         </Link>
                                                     )}
                                                     {item.uploaded_count ==
                                                         item.confirmed_count && (
-                                                        <Link href={'/classification/show'}>
-                                                            <a className="p-2 text-sm underline text-indigo-500">
-                                                                查看
-                                                            </a>
+                                                        <Link
+                                                            href={'/classification/show'}
+                                                            className="p-2 text-sm underline text-indigo-500"
+                                                        >
+                                                            查看
                                                         </Link>
                                                     )}
                                                 </div>
