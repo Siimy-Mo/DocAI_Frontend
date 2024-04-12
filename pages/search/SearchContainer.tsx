@@ -213,46 +213,42 @@ function SearchContainer() {
     }, [getLabelByIdData]);
 
     useEffect(() => {
-        if (router) {
-            console.log(router.query);
-            console.log(router);
-            if (router.query.date) {
-                searchDocumentFormik.setValues({
-                    date: router.query.date + '',
-                    content: '',
-                    tag_id: '',
-                    from: '',
-                    to: '',
-                    page: parseInt(router.query.page + '') || 1
-                });
-                searchDocumentFormik.handleSubmit();
-            } else if (router.query.tag_id) {
-                searchDocumentFormik.setValues({
-                    content: router.query.content + '',
-                    date: '',
-                    tag_id: router.query.tag_id + '',
-                    from: router.query.from + '',
-                    to: router.query.to + '',
-                    page: parseInt(router.query.page + '') || 1
-                });
-                searchDocumentFormik.handleSubmit();
+        if (router.query.date) {
+            searchDocumentFormik.setValues({
+                date: router.query.date + '',
+                content: '',
+                tag_id: '',
+                from: '',
+                to: '',
+                page: parseInt(router.query.page + '') || 1
+            });
+            searchDocumentFormik.handleSubmit();
+        } else if (router.query.tag_id) {
+            searchDocumentFormik.setValues({
+                content: router.query.content + '',
+                date: '',
+                tag_id: router.query.tag_id + '',
+                from: router.query.from + '',
+                to: router.query.to + '',
+                page: parseInt(router.query.page + '') || 1
+            });
+            searchDocumentFormik.handleSubmit();
 
-                getLabelById({
-                    ...apiSetting.Tag.getTagById(router.query.tag_id as string)
-                });
-            } else {
-                searchDocumentFormik.setValues({
-                    content: router.query.content + '',
-                    date: '',
-                    tag_id: '',
-                    from: '',
-                    to: '',
-                    page: parseInt(router.query.page + '') || 1
-                });
-                searchDocumentFormik.handleSubmit();
-            }
+            getLabelById({
+                ...apiSetting.Tag.getTagById(router.query.tag_id as string)
+            });
+        } else {
+            searchDocumentFormik.setValues({
+                content: router.query.content + '',
+                date: '',
+                tag_id: '',
+                from: '',
+                to: '',
+                page: parseInt(router.query.page + '') || 1
+            });
+            searchDocumentFormik.handleSubmit();
         }
-    }, []);
+    }, [router]);
 
     return (
         <>
